@@ -1,6 +1,9 @@
-<?php 
+<?php
     try {
-        require('conexao.php');
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+
+        include('conexao.php');
         
         $sql = "SELECT * FROM tb_usuario WHERE ds_login = '$email' AND ds_senha = '$senha'";
         $registro = $conn->exec($sql);
@@ -14,8 +17,7 @@
                 ':senha' => $_POST['senha']
             ));
             session_start();
-            $_SESSION['ds_login'] = $_POST['login'];
-            $_SESSION['senha'] = $_POST['senha'];
+            
 
         } else {
             echo 'Email já cadastrado. Tente fazer login!';

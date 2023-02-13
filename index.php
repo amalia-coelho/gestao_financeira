@@ -1,8 +1,4 @@
-<?php 
-    if ($_SESSION['login'] == $_POST['ds_login'] && $_SESSION['senha'] == $_POST['senha']){
-        header('Location: homepage.php');
-    }
-?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -126,6 +122,6 @@
          </div>
          <!-- TODO: ver com o eric de mudar o botao entrar para algo discreto abaixo do botao de cadastro -->
   </div>
-  <script src="/js/cadastro.js"></script>
+  <script src="js/cadastro.js"></script>
 </body>
 </html>
