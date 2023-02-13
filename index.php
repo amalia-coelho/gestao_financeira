@@ -1,3 +1,8 @@
+<?php 
+    if ($_SESSION['login'] == $_POST['ds_login'] && $_SESSION['senha'] == $_POST['senha']){
+        header('Location: homepage.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -14,17 +19,21 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$().click(function(){
-				var nm_autor = $("#nm_autor").val();
+			$("#validar").click(function(){
+                var nome = $("#nome").val() + " " + $("#sobrenome").val();
+                var email = $("#email").val();
+                var senha = $("#password").val();
+                // TODO: criar variavel para o radio "gender"
 				$.ajax({
 				url: "php/script_cadastro.php",
 				type: "POST",
-				// data: "nm_autor="+nm_autor,
+                // TODO: completar a lista de inputs e conferir os nomes do script_cadastro com os inputs
+				data: "nome"+nome, "email"+email,
 				dataType: "html"
 
 				}).done(function(resposta) {
 	    			console.log("Test Unit:" + resposta);
-	    			// $("#nm_autor").val(" ");
+	    			
 					
 					}).fail(function(jqXHR, textStatus ) {
 					    console.log("Request failed: " + textStatus);
@@ -51,8 +60,8 @@
 
               <div class="input-group">
                   <div class="input-box">
-                      <label for="Nome">Primeiro Nome</label>
-                      <input id="Nome" type="text" name="Nome" placeholder="Digite seu primeiro nome" class="required" oninput="nameValidate()">
+                      <label for="nome">Primeiro Nome</label>
+                      <input id="nome" type="text" name="Nome" placeholder="Digite seu primeiro nome" class="required" oninput="nameValidate()">
                       <span class="span-required">Nome deve ter no minímo 3 caracteres</span>
                   </div>
 
@@ -115,6 +124,7 @@
                   <button><a id="validar" href="#">Finalizar Cadastro</a> </button>
               </div>
          </div>
+         <!-- TODO: ver com o eric de mudar o botao entrar para algo discreto abaixo do botao de cadastro -->
   </div>
   <script src="/js/cadastro.js"></script>
 </body>
