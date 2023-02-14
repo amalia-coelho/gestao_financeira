@@ -26,6 +26,7 @@ create table tb_usuario(
 	nm_usuario varchar(250),
 	ds_login varchar(300),
 	ds_senha varchar(300),
+	nr_idade int,
 	id_responsavel int,
 	id_nivel int
 );
