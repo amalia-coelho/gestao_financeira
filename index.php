@@ -19,12 +19,13 @@
                 var nome = $("#nome").val() + " " + $("#sobrenome").val();
                 var email = $("#email").val();
                 var senha = $("#password").val();
-                // TODO: criar variavel para o radio "gender"
+                var idade = $("#idade").val();
+
 				$.ajax({
 				url: "php/script_cadastro.php",
 				type: "POST",
                 // TODO: completar a lista de inputs e conferir os nomes do script_cadastro com os inputs
-				data: "nome"+nome, "email"+email,
+				data: "nome"+nome, "email"+email,"senha"+senha,
 				dataType: "html"
 
 				}).done(function(resposta) {
@@ -74,7 +75,7 @@
 
                   <div class="input-box">
                       <label for="number">Idade</label>
-                      <input id="number" type="number" name="number" placeholder="Digite sua idade" oninput="yearValidate()" class="required">
+                      <input id="idade" type="number" name="idade" placeholder="Digite sua idade" oninput="yearValidate()" class="required">
                       <span class="span-required">Idade inválida</span>
                   </div>
 
@@ -100,7 +101,7 @@
 
                   <div class="gender-group">
                       <div class="gender-input">
-                          <input id="female" type="radio" name="gender">
+                          <input id="female" type="radio" name="gender" value="Feminino>
                           <label for="female">Feminino</label>
                       </div>
 
