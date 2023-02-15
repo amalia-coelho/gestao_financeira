@@ -22,10 +22,10 @@
                 var idade = $("#idade").val();
 
 				$.ajax({
-				url: "php/script_cadastro.php",
+				url: "php/script_cadastro1.php",
 				type: "POST",
                 // TODO: completar a lista de inputs e conferir os nomes do script_cadastro com os inputs
-				data: "nome"+nome, "email"+email,"senha"+senha,
+				data: "nome="+nome+"&email="+email+"&senha="+senha+"&idade="+idade,
 				dataType: "html"
 
 				}).done(function(resposta) {

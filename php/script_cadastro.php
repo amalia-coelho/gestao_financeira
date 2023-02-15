@@ -2,11 +2,11 @@
     try {
         include('conexao.php');
 
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
+        $email = addslashes($_POST['email']);
+        $senha = addslashes($_POST['senha']);
 
         $sql = "SELECT * FROM tb_usuario WHERE ds_login = '$email' AND ds_senha = '$senha'";
-        $registro = $conn->exec($sql);
+        $registro = $conn->exec($sql) or exit();
         
         if ($registro == 0) {
             
@@ -17,9 +17,7 @@
                 ':senha' => $_POST['senha'],
                 ':idade' => $_POST['idade']
             ));
-
             
-
         } else {
             echo 'Email já cadastrado. Tente fazer login!';
         }
@@ -27,5 +25,6 @@
     } catch(PDOException $e) {
         echo "<br>".$stmt->rowCount();
         echo 'Error: ' . $e->getMessage();
+        exit();
     }
 ?>
