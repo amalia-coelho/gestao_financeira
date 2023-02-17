@@ -5,8 +5,8 @@
         $email = addslashes($_POST['email']);
         $senha = addslashes($_POST['senha']);
 
-        $sql = "SELECT * FROM tb_usuario WHERE ds_login = '$email' AND ds_senha = '$senha'";
-        $registro = $conn->exec($sql) or exit();
+        $sql = "SELECT * FROM tb_usuario WHERE ds_login = ".$email." AND ds_senha = ".$senha;
+        $registro = $conn->query($sql);
         
         if ($registro == 0) {
             
