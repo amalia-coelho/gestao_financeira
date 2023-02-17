@@ -94,35 +94,10 @@
 
               </div>
 
-              <div class="gender-inputs">
-                  <div class="gender-title">
-                      <h6>Gênero</h6>
-                  </div>
-
-                  <div class="gender-group">
-                      <div class="gender-input">
-                          <input id="female" type="radio" name="gender" value="Feminino>
-                          <label for="female">Feminino</label>
-                      </div>
-
-                      <div class="gender-input">
-                          <input id="male" type="radio" name="gender">
-                          <label for="male">Masculino</label>
-                      </div>
-
-                      <div class="gender-input">
-                          <input id="others" type="radio" name="gender">
-                          <label for="others">Outros</label>
-                      </div>
-                  </div>
-              </div>
-
               <div class="continue-button">
-                  <button><a id="validar" href="#">Finalizar Cadastro</a> </button>
+                  <button id="validar">Finalizar Cadastro</button>
               </div>
          </div>
-         <!-- TODO: ver com o eric de mudar o botao entrar para algo discreto abaixo do botao de cadastro -->
   </div>
-  <script src="js/cadastro.js"></script>
 </body>
 </html>
