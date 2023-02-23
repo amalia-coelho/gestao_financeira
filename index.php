@@ -23,7 +23,7 @@
 				dataType: "html"
 
 				}).done(function(resposta) {
-	    			console.log("Test Unit:" + resposta);
+	    			console.log("Test: " + resposta);
 	    			
 					
 					}).fail(function(jqXHR, textStatus ) {
@@ -38,6 +38,6 @@
     <p>Email: <input type="email" id="email"></p>
     <p>Senha: <input type="password" id="senha"></p>
     <p>Idade: <input type="number" id="idade"></p>
-    <button type="submit" id="validar">Cadastrar</button>
+    <button type="button" id="validar">Cadastrar</button>
 </body>
 </html>
