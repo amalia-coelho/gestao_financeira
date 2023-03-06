@@ -1,23 +1,29 @@
 <?php
-    session_start();
-    include('conexao.php');
-
-    $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE ds_login = :email");
-    $stmt->bindValue(':email', $_POST['email']);
-    $stmt->execute();
-
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    // SE O EMAIL JA FOR CADASTRADO
-    if ($usuario){
-        // SE A SENHA CADASTRADA BATE COM O DO BANCO
-        if(password_verify($_POST['senha'], $usuario['ds_senha'])){
-            //SE FUNFAR
-            $_SESSION['cd_usuario'] = $usuario['cd_usuario'];
-            // VAI PARA HOMEPAGE
-            header('Location: /homepage.php');
+    try{
+        session_start();
+        include('conexao.php');
+        
+        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE ds_login = :email");
+        $stmt->bindValue(':email', $_POST['email']);
+        $stmt->execute();
+        
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // SE O EMAIL JA FOR CADASTRADO
+        if ($usuario){
+            echo 'Email já cadastrado';
+        }else{
+            $stmt = $conn->prepare("INSERT INTO tb_usuario (nm_usuario, ds_login, ds_senha) VALUES(:nome, :email, :senha)");
+            $stmt->execute(array(
+                ':nome' => $_POST['nome'],
+                ':email' => $_POST['email'],
+                ':senha' => $_POST['senha']
+            ));
+            $_SESSION['email'] = $_POST['email'];
+            echo "<meta http-equiv='refresh' content='1'>";
         }
-    }else{
-        echo 'Email não cadastrado';
+    } catch(PDOException $e) {
+        echo 'ERROR: ' . $e->getMessage();
+        echo "<br>".$stmt->rowCount();
     }
 ?>
