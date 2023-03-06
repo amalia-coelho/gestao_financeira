@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (isset($_SESSION['email'])) {
+        header('Location: homepage.php');
+    }else{
+        echo 'BEM VINDO FILHO DA PUTA!';
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -24,7 +32,7 @@
 				dataType: "html"
 
 				}).done(function(resposta){
-                    $(".exibe").html('Test: ' + resposta);
+                    $(".exibe").html(resposta);
                 }).fail(function(jqXHR, textStatus ) {
                     console.log("Request failed: " + textStatus);
                 });
@@ -36,7 +44,10 @@
     <p>Nome: <input type="text" id="nome"></p>
     <p>Email: <input type="email" id="email"></p>
     <p>Senha: <input type="password" id="senha"></p>
-    <p>Idade: <input type="number" id="idade"></p>
     <button type="button" id="validar">Cadastrar</button>
+
+    <div class="exibe">
+
+    </div>
 </body>
 </html>
