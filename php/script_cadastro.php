@@ -1,21 +1,23 @@
-<?php 
-    try {
-        include('conexao.php');
+<?php
+    session_start();
+    include('conexao.php');
 
-        if (isset($_POST['email']) && isset($_POST['senha'])){
-            $email = addslashes($_POST['email']);
-            $senha = addslashes($_POST['senha']);
+    $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE ds_login = :email");
+    $stmt->bindValue(':email', $_POST['email']);
+    $stmt->execute();
 
-        $sql = "SELECT * FROM tb_usuario WHERE ds_login = ".$email." AND ds_senha = ".$senha;
-        $pesquisa = $conn->prepare($sql);
-        $pesquisa->execute();
-
-        $registro = $pesquisa->rowCount();
-        
-        echo $registro;
-    } catch (PDOException $e) {
-        echo "<br>".$stmt->rowCount();
-        echo 'Error: ' . $e->getMessage();
-        exit();
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // SE O EMAIL JA FOR CADASTRADO
+    if ($usuario){
+        // SE A SENHA CADASTRADA BATE COM O DO BANCO
+        if(password_verify($_POST['senha'], $usuario['ds_senha'])){
+            //SE FUNFAR
+            $_SESSION['cd_usuario'] = $usuario['cd_usuario'];
+            // VAI PARA HOMEPAGE
+            header('Location: /homepage.php');
+        }
+    }else{
+        echo 'Email não cadastrado';
     }
 ?>
