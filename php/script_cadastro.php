@@ -11,7 +11,7 @@
         
         // SE O EMAIL JA FOR CADASTRADO
         if ($usuario){
-            echo 'Email já cadastrado';
+            echo 'Email já cadastrado, tente fazer login!';
         }else{
             $stmt = $conn->prepare("INSERT INTO tb_usuario (nm_usuario, ds_login, ds_senha) VALUES(:nome, :email, :senha)");
             $stmt->execute(array(
@@ -20,6 +20,8 @@
                 ':senha' => $_POST['senha']
             ));
             $_SESSION['email'] = $_POST['email'];
+            $_SESSION['nome'] = $_POST['nome'];
+            $_SESSION['cd'] = $usuario['cd_usuario'];
             echo "<meta http-equiv='refresh' content='1'>";
         }
     } catch(PDOException $e) {

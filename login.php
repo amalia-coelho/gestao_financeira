@@ -2,8 +2,6 @@
     session_start();
     if (isset($_SESSION['email'])) {
         header('Location: homepage.php');
-    }else{
-        echo 'BEM VINDO FILHO DA PUTA!';
     }
 ?>
 <!DOCTYPE html>
@@ -21,14 +19,13 @@
 			$("button").click(function(){
 
                 // declaração de variáveis
-                var nome = $('#nome').val();
                 var email = $('#email').val();
                 var senha = $('#senha').val();
 
 				$.ajax({
-				url: "php/script_cadastro.php",
+				url: "php/script_login.php",
 				type: "POST",
-				data: "nome="+nome+"&email="+email+"&senha="+senha,
+				data: "email="+email+"&senha="+senha,
 				dataType: "html"
 
 				}).done(function(resposta){
@@ -41,10 +38,9 @@
 	</script>
   </head>
 <body>
-    <p>Nome: <input type="text" id="nome"></p>
     <p>Email: <input type="email" id="email"></p>
     <p>Senha: <input type="password" id="senha"></p>
     <button type="button" id="validar">Cadastrar</button>
-    <a href="login.php">Logar</a>
+    <a href="index.php">cadastre-se</a>
 </body>
 </html>
