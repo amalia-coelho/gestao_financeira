@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    text-transform: none;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(-360deg, #ee7752, #e73c7e, #23a6d5, #6C63FE);
+    background-size: 400% 400%;
+    animation: fundo 8s ease infinite ;
+  }
+
+  @keyframes fundo{
+    0%{
+      background-position: 0% 50%;
+
+    }
+    50%{
+      background-position: 50% 20%;
+    }
+    100%{
+      background-position: 0% 50%;
+
+    }
+          }
+
+.container {
+    width: 80%;
+    height: 80vh;
+    display: flex;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212);
+}

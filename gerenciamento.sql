@@ -23,7 +23,8 @@ create table tb_categoria(
 
 create table tb_usuario(
 	cd_usuario int primary key auto_increment,
-	nm_usuario varchar(250),
+	nm_usuario varchar(100),
+	sn_usuario varchar(100),
 	ds_login varchar(300),
 	ds_senha varchar(300),
 	nr_idade int,
