@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt">
+<?php
+    session_start();
+    if (!isset($_SESSION['email'])) {
+        ?>
+        <!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,22 +30,28 @@
                     $('button').attr('disabled', 'disabled');
                 }
             });
-			$().click(function(){
-				var nm_autor = $("#nm_autor").val();
-				$.ajax({
-				url: "php/script_cadastro.php",
-				type: "POST",
-				// data: "nm_autor="+nm_autor,
-				dataType: "html"
+			
+            $("button").click(function(){
 
-				}).done(function(resposta) {
-	    			console.log("Test Unit:" + resposta);
-	    			// $("#nm_autor").val(" ");
-					
-					}).fail(function(jqXHR, textStatus ) {
-					    console.log("Request failed: " + textStatus);
-					});
-			});
+                // declaração de variáveis
+                var nome = $('#Nome').val();
+                var sobrenome = $('#sobrenome').val();
+                var idade = $('#number').val();
+                var email = $('#email').val();
+                var senha = $('#password').val();
+
+                $.ajax({
+                url: "./php/script_cadastro.php",
+                type: "POST",
+                data: "nome="+nome+"&sobrenome="+sobrenome+"&idade="+idade+"&email="+email+"&senha="+senha,
+                dataType: "html"
+
+                }).done(function(resposta){
+                    $('#exibe').html(resposta);
+                }).fail(function(jqXHR, textStatus ) {
+                    console.log("Request failed: " + textStatus);
+                });
+            });
 		});
 	</script>
   </head>
@@ -110,7 +120,7 @@
               </div>
               
               <div class="continue-button">
-                  <button id="validar" ><a  href="#">Finalizar Cadastro</a> </button>
+                  <button  type="button" id="validar" >Finalizar Cadastro</button>
                 </div>
             </div>
             <div class="login-button">
@@ -118,6 +128,14 @@
             </div>
         </div>
   </div>
+  <div id="exibe">
+
+  </div>
         <script src="js/cadastro.js"></script>
     </body>
     </html>
+<?php 
+    }else{
+        header('Location:home.php');
+}
+    ?>

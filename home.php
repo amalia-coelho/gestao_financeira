@@ -1,5 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['email'])){
+        header('Location: index.php');
+    }else{
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,7 +84,7 @@
                 <input type="text" placeholder="Buscar Finanças...">
             </div>
             
-            <span class="name-profile">Hi, Eric Junokas</span>
+            <span class="name-profile">Hi, <?php echo $_SESSION['nome'];?></span>
             <i class="uil uil-user-circle"></i>
         </div>
 
@@ -160,3 +166,6 @@
     <script src="js/toggle.js"></script>
 </body>
 </html>
+<?php
+    }
+?>
