@@ -118,6 +118,9 @@
                         <h6>Seja Bem Vindo!</h6>
                     </div>
               </div>
+              <div id="exibe">
+            
+              </div>
               
               <div class="continue-button">
                   <button  type="button" id="validar" >Finalizar Cadastro</button>
@@ -127,9 +130,6 @@
                 <p>Possuí uma conta? <a href="login.php">Entrar</a></p>
             </div>
         </div>
-  </div>
-  <div id="exibe">
-
   </div>
         <script src="js/cadastro.js"></script>
     </body>
