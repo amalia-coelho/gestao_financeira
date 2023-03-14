@@ -11,11 +11,8 @@
         
         // SE O EMAIL JA FOR CADASTRADO
         if ($usuario){
-            
             echo 'Email já cadastrado, tente fazer login!';
-        
         }else{
-            
             $stmt = $conn->prepare("INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade) VALUES(:nome, :sobrenome, :email, :senha, :idade)");
             $stmt->execute(array(
                 ':nome' => $_POST['nome'],
