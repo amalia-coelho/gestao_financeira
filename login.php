@@ -1,5 +1,11 @@
+<?php
+    session_start();
+    if(isset($_SESSION['email'])){
+        header("Location: home.php");
+    }
+?>
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +17,43 @@
     <title>Lançamentos</title>
     <script crossorigin="anonymous" src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js" defer></script>
     <script src="js/MaquinaDeEscrever.js"></script>
-  </head>
+
+    <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('button').attr('disabled', 'disabled');
+
+            $('input[type=text]').on('input', function() {
+                if ($(this).val() !== '') {
+                    $('button').removeAttr("disabled");
+                }
+                else {
+                    $('button').attr('disabled', 'disabled');
+                }
+            });
+            
+            $("button").click(function(){
+
+                // declaração de variáveis
+                var email = $('#email').val();
+                var senha = $('#password').val();
+
+                $.ajax({
+                url: "./php/script_login.php",
+                type: "POST",
+                data: "email="+email+"&senha="+senha,
+                dataType: "html"
+
+                }).done(function(resposta){
+                    $('#exibe').html(resposta);
+                }).fail(function(jqXHR, textStatus ) {
+                    console.log("Request failed: " + textStatus);
+                });
+            });
+        });
+    </script>
+</head>
 <body>
   <div class="container">
       <div class="form-image">
@@ -45,10 +87,13 @@
                   <div class="robot-title">
                       <h6>É bom te ver denovo!</h6>
                   </div>
+                  <div id="exibe">
+
+                  </div>
               </div>
 
               <div class="continue-button">
-                  <button><a id="login" href="#">Finalizar Login</a> </button>
+                  <button type="button">Finalizar Login</button>
               </div>
     </div>
          <div class="register-button">

@@ -1,0 +1,26 @@
+<?php
+    try{
+        session_start();
+        include("conexao.php");
+
+        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE ds_login = :email");
+        $stmt->bindValue(':email', $_POST['email']);
+        $stmt->bindValue(':senha', $_POST['senha']);
+        $stmt->execute();
+            
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($usuario){
+            if($usuario['ds_senha'] == $_POST['senha']){
+                $_SESSION['cd'] = $usuario['cd_usuario'];
+                $_SESSION['nome'] = $usuario['nm_usuario'];
+                $_SESSION['email'] = $_POST['email'];
+                echo "<meta http-equiv='refresh' content='1'>";
+            }
+        }else{
+            echo "Usuário não encontrado"
+        }
+    } catch(PDOException $e) {
+        echo 'ERROR: ' . $e->getMessage();
+        echo "<br>".$stmt->rowCount();
+    }
+?>
