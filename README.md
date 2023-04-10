@@ -1,2 +1,13 @@
-# gestao_financeira
-Um sistema de gestão de suas finanças (gastos e ganhos) de uma maneira simples.
+# Gestao_Financeira
+Um site para gestão de gastos pessoais
+
+## Tarefas atuais
+- [ ] Estabelecer conexão site + banco
+- [ ] Estabelecer conexão principal + dependente
+---
+## Tarefas concluidas
+- [x] Página inicial
+- [x] Página login/cadastro
+- [x] Banco de dados
+
+
