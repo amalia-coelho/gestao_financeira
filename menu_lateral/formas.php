@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Finanças</title>
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="/css/homepag.css">
+    <link rel="stylesheet" href="../css/homepag.css">
     <!-- BOOSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -68,7 +68,7 @@
                 <i class="uil uil-moon"></i>
                 <span class="link-name">Dark Mode</span>
             </a>
-            
+
             <div class="mode-toggle">
                 <span class="switch"></span>
             </div>
@@ -113,14 +113,83 @@
                     </div>
                 </div>
             </div>
-           
+            <!-- Style content -->
+            <style>
+                .nav-title{
+                    background-color: gray;
+
+                    margin-top: 20px;
+                    padding: 10px 30px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+                
+                table {
+                    border-collapse: collapse;
+                    margin: 25px 0;
+                    font-size: 1em;
+                    font-family: sans-serif;
+                    width: 100%;
+                    min-width: 800px;
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                }
+
+                table thead tr {
+                    background-color: #84848c;
+                    color: #ffffff;
+                    text-align: left;
+                }
+
+                table th,
+                table td {
+                    padding: 12px 15px;
+                }
+
+                table tbody tr {
+                    border-bottom: 1px solid #dddddd;
+                }
+
+                table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                table tbody tr:last-of-type {
+                    border-bottom: 2px solid #84848c;
+                }
+            </style>
+            <div class="content">
+                <div class="nav-title">
+                    <h2>Dependentes</h2>
+                    <button href="modal/add_dependentes.php">Adicionar</button>
+                </div>
+                <div class="table-dependentes">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Gasto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include('../php/conexao.php');
+                                $sql = 'SELECT * FROM tb_usuario';
+                                foreach ($conn->query($sql) as $row){
+                                    echo "<tr><td>".$row['nm_usuario']." ".$row['sn_usuario']."</td><td>".$row['ds_login']."</td><td>VAZIO</td></tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
                 </div>
             </div>
         </div>
     </section>
     
-    <script src="js/toggle.js"></script>
+    <script src="../js/toggle.js"></script>
     <!-- BootStrap SRC -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

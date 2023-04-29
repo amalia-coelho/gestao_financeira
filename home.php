@@ -44,7 +44,7 @@
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Categorias</span>
                 </a></li>
-                <li><a href="/menu_lateral/formas.php">
+                <li><a href="menu_lateral/formas.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Formas</span>
                 </a></li>
