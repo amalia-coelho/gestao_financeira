@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Finanças</title>
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="css/homepag.css">
+    <link rel="stylesheet" href="/css/homepag.css">
     <!-- BOOSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -28,7 +28,7 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <img src="img/startech-logo.png" alt="Logo">
+                <img src="/img/startech-logo.png" alt="Logo">
             </div>
             
             <span class="logo_name">StarTech</span>
@@ -36,15 +36,15 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="home.php">
+            <li><a href="/home.php">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="/menu_lateral/categorias.php">
+                <li><a href="categorias.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Categorias</span>
                 </a></li>
-                <li><a href="/menu_lateral/formas.php">
+                <li><a href="formas.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Formas</span>
                 </a></li>
@@ -52,7 +52,7 @@
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
                 </a></li>
-                <li><a href="/menu_lateral/dependentes.php">
+                <li><a href="dependentes.php">
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Dependente</span>
                 </a></li>
@@ -113,83 +113,8 @@
                     </div>
                 </div>
             </div>
-            <div class="overview activity">
-                <div class="add">
-                    
-                    <div class="title">
-                        <i class="uil uil-tachometer-fast-alt"></i>
-                        <span class="text">Gestões recentes</span>
-                    </div>
+           
 
-                    <!-- Botão para acionar modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
-                    Abrir modal de demonstração
-                    </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar mudanças</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Fim do modal -->
-            </div>
-
-                <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">Name</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                    </div>
-                    <div class="data email">
-                        <span class="data-title">Email</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                    </div>
-                    <div class="data joined">
-                        <span class="data-title">Joined</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                    </div>
-                    <div class="data type">
-                        <span class="data-title">Type</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                    </div>
-                    <div class="data status">
-                        <span class="data-title">Status</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                    </div>
                 </div>
             </div>
         </div>

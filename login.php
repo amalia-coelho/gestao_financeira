@@ -1,9 +1,9 @@
 <?php
     session_start();
     if (!isset($_SESSION['email'])) {
-?>
+        ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,30 +15,29 @@
     <title>Lançamentos</title>
     <script crossorigin="anonymous" src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js" defer></script>
     <script src="js/MaquinaDeEscrever.js"></script>
-  
-    <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
 
-    <script type="text/javascript">
-      $(document).ready(function(){
-              $("button").click(function(){
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
 
-                  // declaração de variáveis
-                  var email = $('#email').val();
-                  var senha = $('#password').val();
+                // declaração de variáveis
+                var email = $('#email').val();
+                var senha = $('#password').val();
 
-                  $.ajax({
-                  url: "./php/script_login.php",
-                  type: "POST",
-                  data: "email="+email+"&senha="+senha,
-                  dataType: "html"
+                $.ajax({
+                url: "./php/script_login.php",
+                type: "POST",
+                data: "email="+email+"&senha="+senha,
+                dataType: "html"
 
-                  }).done(function(resposta){
-                      $('#exibe').html(resposta);
-                  }).fail(function(jqXHR, textStatus ) {
-                      console.log("Request failed: " + textStatus);
-                  });
-              });
-      });
+                }).done(function(resposta){
+                    $('#exibe').html(resposta);
+                }).fail(function(jqXHR, textStatus ) {
+                    console.log("Request failed: " + textStatus);
+                });
+            });
+		});
     </script>
   </head>
 <body>
@@ -73,25 +72,23 @@
               <div class="robot-inputs">
                   <div class="robot-title">
                       <h6>É bom te ver denovo!</h6>
-                      <div id="exibe">
-                          
-                      </div>
                   </div>
               </div>
 
               <div class="continue-button">
-                  <button type="button" id="validar">Finalizar Login</button>
+                  <button><a id="login" href="#">Finalizar Login</a> </button>
+                  <div id="exibe"></div>
               </div>
     </div>
          <div class="register-button">
              <p>Não possui uma conta? <a href="index.php">Cadastrar</a></p>
          </div>
   </div>
-  <!-- <script src="js/login.js"></script> -->
+  <script src="js/login.js"></script>
 </body>
 </html>
 <?php 
     }else{
         header('Location:home.php');
 }
-?>
+    ?>
