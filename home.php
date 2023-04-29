@@ -48,11 +48,11 @@
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Formas</span>
                 </a></li>
-                <li><a href="#">
+                <!-- <li><a href="#">
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
-                </a></li>
-                <li><a href="/menu_lateral/dependentes.php">
+                </a></li> -->
+                <li><a href="menu_lateral/dependentes.php">
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Dependente</span>
                 </a></li>
