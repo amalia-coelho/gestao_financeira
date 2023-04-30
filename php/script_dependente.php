@@ -12,7 +12,7 @@
         // SE O EMAIL JA FOR CADASTRADO
         if ($usuario){
             $id_update = $usuario['cd_usuario'];
-            
+
             $stmt = $conn->prepare("UPDATE tb_usuario SET id_responsavel = :id_responsavel WHERE cd_usuario = :cd_usuario");
             $stmt->bindValue(':id_responsavel', $_SESSION['cd']);
             $stmt->bindValue(':cd_usuario', $id_update);
@@ -20,16 +20,15 @@
 
             echo "Usuário adicionado como dependente! <a href='../home.php'>Voltar</a>";
         }else{
-            $stmt = $conn->prepare("INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, id_responsavel, id_nivel) VALUES(:nome, :sobrenome, :email, :senha, :id_responsavel, :nivel)");
+            $stmt = $conn->prepare("INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, id_responsavel, id_nivel) VALUES(:nome, :sobrenome, :email, :senha, :responsavel, :nivel)");
             $stmt->execute(array(
                 ':nome' => $_POST['nome'],
                 ':sobrenome' => $_POST['sobrenome'],
                 ':email' => $_POST['email'],
                 ':senha' => $_POST['senha'],
-                ':id_responsavel' => $_SESSION['cd'],
+                ':responsavel' => $_SESSION['cd'],
                 ':nivel' => 2
             ));
-            
             echo "Novo usuário cadastrado e adicionado como seu dependente! <a href='../home.php'>Voltar</a>";
         }
     } catch(PDOException $e) {

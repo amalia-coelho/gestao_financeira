@@ -1,7 +1,7 @@
 <?php
     session_start();
     if (!isset($_SESSION['email'])){
-        header('Location: index.php');
+        header('Location: ../index.php');
     }else{
 ?>
 <!DOCTYPE html>
@@ -14,41 +14,35 @@
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="../css/homepag.css">
     <!-- BOOSTRAP -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+    
     <!----===== BootStrap 5 CSS ===== -->
-
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
-    <script type="text/javascript" src="../js/jquery-3.6.1.min.js"></script>
+    
+    <script type="text/javascript" src="./js/jquery-3.6.1.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function(){
             $("button").click(function(){
                 var nomeCompleto = $('#nm_usuario').val();
-                var nome_sobrenome = nomeCompleto.split(" "); 
-
-                // declaração de variáveis
-                var nome = nome_sobrenome[0];
-                var sobrenome = nome_sobrenome[1];
-                var email = $('#ds_login').val();
-                var senha = $('#ds_senha').val();
+                var nome_sobrenome = nomeCompleto.split(" ");
 
                 $.ajax({
-                url: "../php/script_dependente.php",
-                type: "POST",
-                data: "nome="+nome+"&sobrenome="+sobrenome+"&email="+email+"&senha="+senha,
-                dataType: "html"
+                    url: "../php/script_dependente.php",
+                    type: "POST",
+                    data: "nome="+nome_sobrenome[0]+"&sobrenome="+nome_sobrenome[1]+"&email="+$("#ds_login").val()+"&senha="+$("#ds_senha").val(),
+                    dataType: "html"
 
-                }).done(function(resposta){
-                    $('#exibe').html(resposta);
-                }).fail(function(jqXHR, textStatus ) {
-                    $('#exibe').html("Request failed: " + textStatus);
-                });
+                    }).done(function(resposta){
+                        $('#exibe').html(resposta);
+                    }).fail(function(jqXHR, textStatus ) {
+                        $('#exibe').html("Request failed: " + textStatus);
+                    });
             });
         });
     </script>
@@ -118,7 +112,7 @@
             <i class="uil uil-user-circle"></i>
         </div>
 
-        <div class="dash-content">
+        <!-- <div class="dash-content">
             <div class="overview">
                 <div class="title">
                     <i class="uil uil-tachometer-fast-alt"></i>
@@ -141,11 +135,12 @@
                         <span class="number">30,000</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="content">
                 <!-- Style - Content -->
                 <style>
                     .form{
+                        padding-top: 10em;
                         width:80%;
                         display: flex;
                         justify-content: space-between;
@@ -173,6 +168,13 @@
                         background-color: green;
                         color: #FFF;
                         font-size: 1em;
+                    } 
+
+                    #button{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-itens: center;
                     }
                 </style>
                 <div class="title">
@@ -193,10 +195,8 @@
                     </div>
                 </div>
                 <div id="button">
-                    <button type="button">Cadastrar</button>
-                    <div id="exibe">
-                        
-                    </div>
+                    <button type="button" id="validar">Cadastrar</button>
+                    <p id="exibir"></p>
                 </div>
             </div>
             </div>
