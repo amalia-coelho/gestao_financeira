@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION['email'])){
+    if (isset($_SESSION['email'])){
         header('Location: index.php');
     }else{
 ?>
@@ -36,29 +36,28 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="home.php">
+                <li><a href="#">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="/menu_lateral/categorias.php">
+                <li><a href="categorias.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Categorias</span>
                 </a></li>
-                <li><a href="menu_lateral/formas.php">
+                <li><a href="formas.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Formas</span>
                 </a></li>
-                <!-- <li><a href="#">
+                <li><a href="#">
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
-                </a></li> -->
-                <li><a href="menu_lateral/dependentes.php">
+                </a></li>
+                <li><a href="#">
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Dependente</span>
                 </a></li>
             </ul>
-            <ul class="logout-mode"> 
-                <li><a href="logout.php">
+            <ul class="logout-mode">                <li><a href="#">
                 <i class="uil uil-signout"></i>
                 <span class="link-name">Logout</span>
             </a></li>
@@ -85,7 +84,7 @@
                 <input type="text" placeholder="Buscar Finanças...">
             </div>
             
-            <span class="name-profile">Hi, <?php echo $_SESSION['nome'];?> </span>
+            <span class="name-profile">Hi, <!--<< ?php echo $_SESSION['nome'];?> --></span>
             <i class="uil uil-user-circle"></i>
         </div>
 
@@ -116,38 +115,68 @@
             <div class="overview activity">
                 <div class="add">
                     
-                    <div class="title">
-                        <i class="uil uil-tachometer-fast-alt"></i>
-                        <span class="text">Gestões recentes</span>
-                    </div>
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Gestões recentes</span>
+                </div>
 
-                    <!-- Botão para acionar modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
-                    Abrir modal de demonstração
-                    </button>
+                                    <!-- Botão para acionar modal -->
+            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">
+              Adicionar nova gestão
+            </button>
 
             <!-- Modal -->
             <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+                <div class="modal-content ">
+                  <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="exampleModalLabel">Gestão Financeira</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    ...
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                      <button type="button" class="btn btn-danger">Concluir</button>
+                      <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Fim do modal -->
-            </div>
+
+<!-- Fim do modal -->
+                </div>
 
                 <div class="activity-data">
                     <div class="data names">

@@ -94,7 +94,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 1rem 0;
 }
 
@@ -132,28 +132,26 @@
     color: #000000be;
 }
 
-.robot-group {
+
+.robot-inputs {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     margin-top: 0.62rem;
     padding: 0 .5rem;
 }
 
-.robot-input {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-}
-
-.robot-input input {
+.robot-input h6 {
     margin-right: 0.35rem;
 }
 
-.robot-input label {
-    font-size: 0.81rem;
+.robot-title h6 {
+    font-size: .9rem;
     font-weight: 600;
     color: #000000c0;
 }
+
+
 
 .continue-button button {
     width: 100%;
