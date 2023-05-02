@@ -54,3 +54,11 @@ alter table tb_lancamento add foreign key fk_lancamento_usuario(id_usuario) refe
 alter table tb_lancamento add foreign key fk_lancamento_categoria(id_categoria) references tb_categoria(cd_categoria);
 alter table tb_lancamento add foreign key fk_lancamento_pagto(id_forma_pagto) references tb_forma_pagto(cd_forma_pagto);
 alter table tb_lancamento add foreign key fk_lancamento_responsavel(id_responsavel) references tb_responsavel(cd_responsavel);
+
+INSERT INTO tb_nivel(nm_nivel) VALUES ('Responsavel');
+INSERT INTO tb_nivel(nm_nivel) VALUES ('Dependente');
+INSERT INTO tb_nivel(nm_nivel) VALUES ('Pre-cadastro');
+
+INSERT INTO tb_usuario(nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade, id_responsavel, id_nivel) VALUES ('Amália','Coelho', 'amaliacoelho@gmail.com', 'oioioioi', 17, null, 1);
+
+INSERT INTO tb_usuario(nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade, id_responsavel, id_nivel) VALUES ('Eric','Junokas', 'ericjunokas@gmail.com', 'pipipipi', 17, null, 1);

@@ -1,7 +1,7 @@
 <?php
     session_start();
     if (!isset($_SESSION['email'])){
-        header('Location: index.php');
+        header('Location: ../index.php');
     }else{
 ?>
 <!DOCTYPE html>
@@ -14,21 +14,44 @@
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="../css/homepag.css">
     <!-- BOOSTRAP -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+    
     <!----===== BootStrap 5 CSS ===== -->
-
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    
+    <script type="text/javascript" src="./js/jquery-3.6.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("button").click(function(){
+                var nomeCompleto = $('#nm_usuario').val();
+                var nome_sobrenome = nomeCompleto.split(" ");
+
+                $.ajax({
+                    url: "../php/script_dependente.php",
+                    type: "POST",
+                    data: "nome="+nome_sobrenome[0]+"&sobrenome="+nome_sobrenome[1]+"&email="+$("#ds_login").val()+"&senha="+$("#ds_senha").val(),
+                    dataType: "html"
+
+                    }).done(function(resposta){
+                        $('#exibe').html(resposta);
+                    }).fail(function(jqXHR, textStatus ) {
+                        $('#exibe').html("Request failed: " + textStatus);
+                    });
+            });
+        });
+    </script>
 </head>
 <body>
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <img src="/img/startech-logo.png" alt="Logo">
+                <img src="../img/startech-logo.png" alt="Logo">
             </div>
             
             <span class="logo_name">StarTech</span>
@@ -58,7 +81,7 @@
                 </a></li>
             </ul>
             <ul class="logout-mode"> 
-                <li><a href="../logout.php">
+                <li><a href="logout.php">
                 <i class="uil uil-signout"></i>
                 <span class="link-name">Logout</span>
             </a></li>
@@ -68,7 +91,7 @@
                 <i class="uil uil-moon"></i>
                 <span class="link-name">Dark Mode</span>
             </a>
-
+            
             <div class="mode-toggle">
                 <span class="switch"></span>
             </div>
@@ -89,7 +112,7 @@
             <i class="uil uil-user-circle"></i>
         </div>
 
-        <div class="dash-content">
+        <!-- <div class="dash-content">
             <div class="overview">
                 <div class="title">
                     <i class="uil uil-tachometer-fast-alt"></i>
@@ -112,79 +135,71 @@
                         <span class="number">30,000</span>
                     </div>
                 </div>
-            </div>
-            <!-- Style content -->
-            <style>
-                .nav-title{
-                    background-color: gray;
-
-                    margin-top: 20px;
-                    padding: 10px 30px;
-                    display: flex;
-                    justify-content: space-between;
-                }
-                
-                table {
-                    border-collapse: collapse;
-                    margin: 20px 0;
-                    font-size: 1em;
-                    font-family: sans-serif;
-                    width: 100%;
-                    min-width: 800px;
-                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-                }
-
-                table thead tr {
-                    background-color: #84848c;
-                    color: #ffffff;
-                    text-align: left;
-                }
-
-                table th,
-                table td {
-                    padding: 10px 12px;
-                }
-
-                table tbody tr {
-                    border-bottom: 1px solid #dddddd;
-                }
-
-                table tbody tr:nth-of-type(even) {
-                    background-color: #f3f3f3;
-                }
-
-                table tbody tr:last-of-type {
-                    border-bottom: 2px solid #84848c;
-                }
-            </style>
+            </div> -->
             <div class="content">
-                <div class="nav-title">
-                    <h2>Dependentes</h2>
-                    <a href="../modal/add_dependentes.php">Adicionar</a>
+                <!-- Style - Content -->
+                <style>
+                    .form{
+                        padding-top: 10em;
+                        width:80%;
+                        display: flex;
+                        justify-content: space-between;
+
+                    }
+
+                    #button{
+                        width: 80%;
+                        margin-top: 20px;
+                        display: flex;
+                        justify-content: center;
+                    }
+
+                    #text-input input{
+                        width: 240px;
+                        height: 2.3em;
+                        border-radius: 9px;
+
+                        font-size: 1em;
+                        padding-left: 0.5em;
+                    }
+
+                    #button button{
+                        width: 200px;
+                        background-color: green;
+                        color: #FFF;
+                        font-size: 1em;
+                    } 
+
+                    #button{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-itens: center;
+                    }
+                </style>
+                <div class="title">
+                    <h4>Cadastro de Dependente</h4>
                 </div>
-                <div class="table-dependentes">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Gasto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                include('../php/conexao.php');
-                                $sql = 'SELECT * FROM tb_usuario WHERE id_responsavel = '.$_SESSION['cd'];
-                                foreach ($conn->query($sql) as $row){
-                                    echo "<tr><td>".$row['nm_usuario']." ".$row['sn_usuario']."</td><td>".$row['ds_login']."</td><td>VAZIO</td></tr>";
-                                }
-                            ?>
-                        </tbody>
-                    </table>
+                <div class="form">
+                    <div id="text-input">
+                        <p>Nome:</p>
+                        <input type="text" id="nm_usuario">
+                    </div>
+                    <div id="text-input">
+                        <p>Email:</p>
+                        <input type="text" id="ds_login">
+                    </div>
+                    <div id="text-input">
+                        <p>Senha:</p>
+                        <input type="password" id="ds_senha">
+                    </div>
+                </div>
+                <div id="button">
+                    <button type="button" id="validar">Cadastrar</button>
+                    <p id="exibir"></p>
                 </div>
             </div>
-
-                </div>
+            </div>
             </div>
         </div>
     </section>
