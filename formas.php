@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION['email'])){
+    if (isset($_SESSION['email'])){
         header('Location: index.php');
     }else{
 ?>
@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Finanças</title>
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="/css/homepag.css">
+    <link rel="stylesheet" href="css/homepag.css">
     <!-- BOOSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -28,15 +28,15 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <img src="/img/startech-logo.png" alt="Logo">
+                <img src="img/startech-logo.png" alt="Logo">
             </div>
             
-            <span class="logo_name">StarTeaaaaach</span>
+            <span class="logo_name">StarTech</span>
         </div>
 
         <div class="menu-items">
             <ul class="nav-links">
-            <li><a href="/home.php">
+                <li><a href="home.php">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
@@ -44,7 +44,7 @@
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Categorias</span>
                 </a></li>
-                <li><a href="formas.php">
+                <li><a href="#">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Formas</span>
                 </a></li>
@@ -57,8 +57,7 @@
                     <span class="link-name">Dependente</span>
                 </a></li>
             </ul>
-            <ul class="logout-mode"> 
-                <li><a href="logout.php">
+            <ul class="logout-mode">                <li><a href="#">
                 <i class="uil uil-signout"></i>
                 <span class="link-name">Logout</span>
             </a></li>
@@ -224,6 +223,7 @@
             </div>
         </div>
     </section>
+    
     
     <script src="js/toggle.js"></script>
     <!-- BootStrap SRC -->

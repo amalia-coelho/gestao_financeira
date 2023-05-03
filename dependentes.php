@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION['email'])){
+    if (isset($_SESSION['email'])){
         header('Location: index.php');
     }else{
 ?>
@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Finanças</title>
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="/css/homepag.css">
+    <link rel="stylesheet" href="css/homepag.css">
     <!-- BOOSTRAP -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -28,7 +28,7 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <img src="/img/startech-logo.png" alt="Logo">
+                <img src="img/startech-logo.png" alt="Logo">
             </div>
             
             <span class="logo_name">StarTech</span>
@@ -85,7 +85,7 @@
                 <input type="text" placeholder="Buscar Finanças...">
             </div>
             
-            <span class="name-profile">Hi, <?php echo $_SESSION['nome'];?> </span>
+            <span class="name-profile">Hi, <!--<< ?php echo $_SESSION['nome'];?> --></span>
             <i class="uil uil-user-circle"></i>
         </div>
 
@@ -113,8 +113,88 @@
                     </div>
                 </div>
             </div>
-           
+            <div class="overview activity">
+                <div class="add">
+                    
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Gestões recentes</span>
+                </div>
 
+                                    <!-- Botão para acionar modal -->
+            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">
+              Adicionar nova gestão
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content ">
+                  <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="exampleModalLabel">Gestão Financeira</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm nome" id="floatingInput" placeholder="name@example.com" name="nome">
+                            <label style="color: #000" for="nome">Nome</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm email" id="floatingInput" placeholder="name@example.com" name="email">
+                            <label style="color: #000" for="email">Email</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm senha" id="floatingInput" placeholder="name@example.com" name="senha">
+                            <label style="color: #000" for="senha">Senha</label>
+                
+                        </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger">Concluir</button>
+                      <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<!-- Fim do modal -->
+                </div>
+
+                <div class="activity-data">
+                <table class="table" style="" >
+                    <thead class="thead-dark bg-dark text-white">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                    </table>
                 </div>
             </div>
         </div>

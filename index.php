@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="login-button">
-                <p>Possuí uma conta? <a href="login.php">Entrar</a></p>
+                <p>Possui uma conta? <a href="login.php">Entrar</a></p>
             </div>
         </div>
   </div>
