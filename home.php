@@ -52,7 +52,7 @@
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
                 </a></li>
-                <li><a href="#">
+                <li><a href="dependentes.php">
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Dependente</span>
                 </a></li>

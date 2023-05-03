@@ -31,7 +31,7 @@
                 <img src="img/startech-logo.png" alt="Logo">
             </div>
             
-            <span class="logo_name">StarTeaaaaach</span>
+            <span class="logo_name">StarTech</span>
         </div>
 
         <div class="menu-items">
@@ -183,10 +183,13 @@
                     <div class="data names">
                         <span class="data-title">Name</span>
                         <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
+                        <?php
+                                include('../php/conexao.php');
+                                $sql = 'SELECT * FROM tb_usuario';
+                                foreach ($conn->query($sql) as $row){
+                                    echo "<span class='data-list'>".$row['nm_usuario']." ".$row['sn_usuario']."</span><span class='data-list'><br>".$row['ds_login']."</td><td>VAZIO</td></tr>";
+                                }
+                            ?>
                     </div>
                     <div class="data email">
                         <span class="data-title">Email</span>

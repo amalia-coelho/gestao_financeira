@@ -52,7 +52,7 @@
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
                 </a></li>
-                <li><a href="#">
+                <li><a href="dependentes.php">
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Dependente</span>
                 </a></li>
@@ -112,8 +112,118 @@
                     </div>
                 </div>
             </div>
+            <div class="overview activity">
+                <div class="add">
+                    
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Gestões recentes</span>
+                </div>
+
+                                    <!-- Botão para acionar modal -->
+            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">
+              Adicionar nova gestão
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content ">
+                  <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="exampleModalLabel">Gestão Financeira</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
+                            <label style="color: #000" for="editora">Editora</label>
+                
+                        </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger">Concluir</button>
+                      <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<!-- Fim do modal -->
+                </div>
+
+                <div class="activity-data">
+                    <div class="data names">
+                        <span class="data-title">Name</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                    </div>
+                    <div class="data email">
+                        <span class="data-title">Email</span>
+                        <span class="data-list">mayte.bronzatto@gmail.com</span>
+                        <span class="data-list">mayte.bronzatto@gmail.com</span>
+                        <span class="data-list">mayte.bronzatto@gmail.com</span>
+                        <span class="data-list">mayte.bronzatto@gmail.com</span>
+                        <span class="data-list">mayte.bronzatto@gmail.com</span>
+                    </div>
+                    <div class="data joined">
+                        <span class="data-title">Joined</span>
+                        <span class="data-list">2022-11-30</span>
+                        <span class="data-list">2022-11-30</span>
+                        <span class="data-list">2022-11-30</span>
+                        <span class="data-list">2022-11-30</span>
+                        <span class="data-list">2022-11-30</span>
+                    </div>
+                    <div class="data type">
+                        <span class="data-title">Type</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                        <span class="data-list">Maytê Bronzatto</span>
+                    </div>
+                    <div class="data status">
+                        <span class="data-title">Status</span>
+                        <span class="data-list">Open</span>
+                        <span class="data-list">Open</span>
+                        <span class="data-list">Open</span>
+                        <span class="data-list">Open</span>
+                        <span class="data-list">Open</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    
     
     <script src="js/toggle.js"></script>
     <!-- BootStrap SRC -->

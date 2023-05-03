@@ -31,7 +31,7 @@
                 <img src="/img/startech-logo.png" alt="Logo">
             </div>
             
-            <span class="logo_name">StarTech</span>
+            <span class="logo_name">StarTeaaaaach</span>
         </div>
 
         <div class="menu-items">
