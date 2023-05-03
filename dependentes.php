@@ -138,33 +138,18 @@
                   </div>
                   <div class="modal-body">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
+                            <input type="text" class="form-control form-control-sm nome" id="floatingInput" placeholder="name@example.com" name="nome">
+                            <label style="color: #000" for="nome">Nome</label>
                 
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
+                            <input type="text" class="form-control form-control-sm email" id="floatingInput" placeholder="name@example.com" name="email">
+                            <label style="color: #000" for="email">Email</label>
                 
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
+                            <input type="text" class="form-control form-control-sm senha" id="floatingInput" placeholder="name@example.com" name="senha">
+                            <label style="color: #000" for="senha">Senha</label>
                 
                         </div>
                   </div>
@@ -180,49 +165,36 @@
                 </div>
 
                 <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">Name</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <?php
-                                include('../php/conexao.php');
-                                $sql = 'SELECT * FROM tb_usuario';
-                                foreach ($conn->query($sql) as $row){
-                                    echo "<span class='data-list'>".$row['nm_usuario']." ".$row['sn_usuario']."</span><span class='data-list'><br>".$row['ds_login']."</td><td>VAZIO</td></tr>";
-                                }
-                            ?>
-                    </div>
-                    <div class="data email">
-                        <span class="data-title">Email</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                    </div>
-                    <div class="data joined">
-                        <span class="data-title">Joined</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                    </div>
-                    <div class="data type">
-                        <span class="data-title">Type</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                    </div>
-                    <div class="data status">
-                        <span class="data-title">Status</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                    </div>
+                <table class="table" style="" >
+                    <thead class="thead-dark bg-dark text-white">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                    </table>
                 </div>
             </div>
         </div>
