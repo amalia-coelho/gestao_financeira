@@ -36,7 +36,7 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-            <li><a href="/home.php">
+            <li><a href="home.php">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
@@ -164,8 +164,8 @@
 <!-- Fim do modal -->
                 </div>
 
-                <div class="activity-data">
-                <table class="table" style="" >
+                <div class="activity-data" style="display: flex; align-items:center; justify-content:center; ">
+                <table class="table" style="width:70vw;" >
                     <thead class="thead-dark bg-dark text-white">
                         <tr>
                         <th scope="col">#</th>
