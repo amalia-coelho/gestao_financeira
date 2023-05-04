@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION['email'])){
+    if (!isset($_SESSION['email'])){
         header('Location: index.php');
     }else{
 ?>
@@ -57,7 +57,7 @@
                     <span class="link-name">Dependente</span>
                 </a></li>
             </ul>
-            <ul class="logout-mode">                <li><a href="#">
+            <ul class="logout-mode">                <li><a href="logout.php">
                 <i class="uil uil-signout"></i>
                 <span class="link-name">Logout</span>
             </a></li>
