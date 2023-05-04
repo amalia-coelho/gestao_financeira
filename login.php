@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['email'])) {
+        ?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -11,6 +15,29 @@
     <title>Lançamentos</title>
     <script crossorigin="anonymous" src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js" defer></script>
     <script src="js/MaquinaDeEscrever.js"></script>
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+
+                // declaração de variáveis
+                var email = $('#email').val();
+                var senha = $('#password').val();
+
+                $.ajax({
+                url: "./php/script_login.php",
+                type: "POST",
+                data: "email="+email+"&senha="+senha,
+                dataType: "html"
+
+                }).done(function(resposta){
+                    $('#exibe').html(resposta);
+                }).fail(function(jqXHR, textStatus ) {
+                    console.log("Request failed: " + textStatus);
+                });
+            });
+		});
+    </script>
   </head>
 <body>
   <div class="container">
@@ -25,7 +52,7 @@
                   </div>
                 </div>
                 
-              <div class="input-group">
+                <div class="input-group">
                   <div class="input-box">
                       <label for="email">E-mail</label>
                       <input id="email" type="email" name="email" placeholder="Digite seu e-mail" class="required" oninput="emailValidate()" autocomplete="off">
@@ -58,3 +85,8 @@
   <script src="js/login.js"></script>
 </body>
 </html>
+<?php 
+    }else{
+        header('Location:home.php');
+}
+    ?>

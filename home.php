@@ -172,7 +172,18 @@
                     <tbody>
                         <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
+                        <select class="form-select" aria-label="Default select example" style="margin-bottom: 1rem;">
+                            <option selected value="" data-default disabled selected>Selecione uma Categoria</option>
+                            <?php 
+                                 include('./php/conexao.php');
+                                 $option = "";
+                                 $sql = 'SELECT * FROM tb_categoria';
+                                foreach ($conn->query($sql) as $row){
+                                    $option .= "<option value='".$row['cd_categoria']."'>".$row['nm_categoria']."</option>";
+                                }
+                                 echo $option;
+                                ?>
+                        </select>
                         <td>Otto</td>
                         <td>@mdo</td>
                         </tr>
