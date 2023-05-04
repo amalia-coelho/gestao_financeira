@@ -19,12 +19,13 @@
 
     <!----===== BootStrap 5 CSS ===== -->
 
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     
-    <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/jquery-3.6.1.min.js"></script>
+    
     <!-- JQUERY AJAX -->
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -34,7 +35,7 @@
                 var email = $('#email').val();
 
                 $.ajax({
-                url: "php/script_dependentes.php",
+                url: "./php/script_dependentes.php",
                 type: "POST",
                 data: "email="+email,
                 dataType: "html"
