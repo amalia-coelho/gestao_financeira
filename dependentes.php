@@ -11,23 +11,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dependentes</title>
+    
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="css/homepag.css">
-    <!-- BOOSTRAP -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
-
-    <!----===== BootStrap 5 CSS ===== -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-
-    <!----===== Iconscout CSS ===== -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     
-    <script src="js/jquery-3.6.1.min.js"></script>
-    
-    <!-- JQUERY AJAX -->
-	<script type="text/javascript">
+    <!-- IMPORT JQUERY -->
+    <script text="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+	<!-- Jquery / Ajax -->
+    <script type="text/javascript">
 		$(document).ready(function(){
             $("#concluir").click(function(){
 
@@ -35,7 +28,7 @@
                 var email = $('#email').val();
 
                 $.ajax({
-                url: "./php/script_dependentes.php",
+                url: "php/script_dependentes.php",
                 type: "POST",
                 data: "email="+email,
                 dataType: "html"
@@ -53,6 +46,16 @@
             });
         });
 	</script>
+
+
+
+    <!----===== BootStrap 5 CSS ===== -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    
 </head>
 <body>
     <nav>
@@ -165,16 +168,10 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                        <!-- <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm nome" id="nm_usuario" placeholder="Carlos Alberto" name="nome">
-                            <label style="color: #000" for="nome">Nome</label>
-                
-                        </div> -->
                         <p>Adicione o email do seu dependente no campo abaixo:</p>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control form-control-sm email" id="email" placeholder="name@example.com" name="email">
                             <label style="color: #000" for="email">Email</label>
-                
                         </div>
                         <div id="exibe">
                             <!-- Exibe as informações -->
@@ -192,7 +189,7 @@
                 </div>
 
                 <div class="activity-data">
-                <table class="table" style="" >
+                <table class="table" style="">
                     <thead class="thead-dark bg-dark text-white">
                         <tr>
                         <th scope="col">Nome</th>
@@ -202,8 +199,8 @@
                     </thead>
                     <tbody>
                     <?php
-		                include('/php/conexao.php');
-		                $sql = 'SELECT * FROM tb_usuario WHERE id_responsavel = '.$_SESSION['cd'];
+		                include("php/conexao.php");
+		                $sql = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
 
 		                foreach ($conn->query($sql) as $row){
 			                echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td>Futuramente...</td></tr>";
@@ -219,7 +216,7 @@
     <script src="js/toggle.js"></script>
     <!-- BootStrap SRC -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>>
 </body>
