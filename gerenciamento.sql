@@ -8,17 +8,20 @@ create table tb_nivel(
 
 create table tb_responsavel(
 	cd_responsavel int primary key auto_increment,
-	nm_responsavel varchar(250)
+	nm_responsavel varchar(250),
+	id_usuario_busca int not null
 );
 
 create table tb_forma_pagto(
 	cd_forma_pagto int primary key auto_increment,
-	nm_forma_pagto varchar(250)
+	nm_forma_pagto varchar(250),
+	id_usuario_busca int
 );
 
 create table tb_categoria(
 	cd_categoria int primary key auto_increment,
-	nm_categoria varchar(250)
+	nm_categoria varchar(250),
+	id_usuario_busca int
 );
 
 create table tb_usuario(
@@ -54,3 +57,17 @@ alter table tb_lancamento add foreign key fk_lancamento_usuario(id_usuario) refe
 alter table tb_lancamento add foreign key fk_lancamento_categoria(id_categoria) references tb_categoria(cd_categoria);
 alter table tb_lancamento add foreign key fk_lancamento_pagto(id_forma_pagto) references tb_forma_pagto(cd_forma_pagto);
 alter table tb_lancamento add foreign key fk_lancamento_responsavel(id_responsavel) references tb_responsavel(cd_responsavel);
+alter table tb_responsavel add foreign key fk_responsavel_usuario(id_usuario_busca) references tb_usuario(cd_usuario);
+alter table tb_forma_pagto add foreign key fk_formaPagto_usuario(id_usuario_busca) references tb_usuario(cd_usuario);
+alter table tb_categoria add foreign key fk_categoria_usuario(id_usuario_busca) references tb_usuario(cd_usuario);
+
+-- CADASTROS PADRÃO
+
+-- Niveis
+INSERT INTO tb_nivel (nm_nivel) VALUES ('Responsavel');
+INSERT INTO tb_nivel (nm_nivel) VALUES ('Dependente');
+
+-- Usuários
+INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade, id_nivel) VALUES ('Amália', 'Coelho', 'amaliacoelho@gmail.com', 'oioioioi', 17, 1);
+INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade, id_nivel) VALUES ('Eric', 'Junokas', 'ericjunokas@gmail.com', 'oioioioi', 17, 1);
+INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade) VALUES ('Larissa', 'Pergentino', 'lalalinda@gmail.com', 'lalalinda', 17);

@@ -2,6 +2,8 @@
     session_start();
     if (!isset($_SESSION['email'])){
         header('Location: index.php');
+    ;}else if($_SESSION['id_nivel'] == 2){
+        header('Location: home.php');
     }else{
 ?>
 <!DOCTYPE html>
@@ -69,18 +71,18 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-            <li><a href="/home.php">
+            <li><a href="home.php">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="categorias.php">
+                <!-- <li><a href="categorias.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Categorias</span>
                 </a></li>
                 <li><a href="formas.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Formas</span>
-                </a></li>
+                </a></li> -->
                 <li><a href="#">
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
@@ -189,24 +191,24 @@
                 </div>
 
                 <div class="activity-data">
-                <table class="table" style="">
-                    <thead class="thead-dark bg-dark text-white">
-                        <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-		                include("php/conexao.php");
-		                $sql = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
+                    <table class="table" style="">
+                        <thead class="thead-dark bg-dark text-white">
+                            <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            include("php/conexao.php");
+                            $sql = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
 
-		                foreach ($conn->query($sql) as $row){
-			                echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td>Futuramente...</td></tr>";
-		                }
-                    ?>
-                    </tbody>
+                            foreach ($conn->query($sql) as $row){
+                                echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td>Futuramente...</td></tr>";
+                            }
+                        ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -215,8 +217,7 @@
     
     <script src="js/toggle.js"></script>
     <!-- BootStrap SRC -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>>
 </body>

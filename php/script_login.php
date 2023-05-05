@@ -15,6 +15,7 @@
                 $_SESSION['email'] = $_POST['email'];
                 $_SESSION['nome'] = $usuario['nm_usuario'];
                 $_SESSION['cd'] = $usuario['cd_usuario'];
+                $_SESSION['id_nivel'] = $usuario['id_nivel'];
                 echo "<meta http-equiv='refresh' content='1'>";
             }else{
                 echo "Senha incorreta!";
