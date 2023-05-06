@@ -26,7 +26,7 @@
             $_SESSION['email'] = $_POST['email'];
             $_SESSION['nome'] = $_POST['nome'];
             $_SESSION['cd'] = $usuario['cd_usuario'];
-            $_SESSION['id_nivel'] = $usuario['id_nivel']
+            $_SESSION['id_nivel'] = $usuario['id_nivel'];
             echo "<meta http-equiv='refresh' content='1'>";
         }
     } catch(PDOException $e) {

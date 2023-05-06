@@ -71,3 +71,21 @@ INSERT INTO tb_nivel (nm_nivel) VALUES ('Dependente');
 INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade, id_nivel) VALUES ('Amália', 'Coelho', 'amaliacoelho@gmail.com', 'oioioioi', 17, 1);
 INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade, id_nivel) VALUES ('Eric', 'Junokas', 'ericjunokas@gmail.com', 'oioioioi', 17, 1);
 INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade) VALUES ('Larissa', 'Pergentino', 'lalalinda@gmail.com', 'lalalinda', 17);
+
+-- Categorias
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Mercado');
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Eletrônicos');
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Suplementos');
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Investimentos');
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Roupas');
+
+-- Formas de pagamentos
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('pix');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('cartao de credito');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('cartao de debito');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('boleto');
+
+-- Responsavel
+INSERT INTO tb_responsavel (nm_responsavel) VALUES ('Etec de itanhaém');
+INSERT INTO tb_responsavel (nm_responsavel) VALUES ('Bradesco');
+INSERT INTO tb_responsavel (nm_responsavel) VALUES ('Motion Fit');

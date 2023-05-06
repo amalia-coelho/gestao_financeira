@@ -2,7 +2,7 @@
     session_start();
     if (!isset($_SESSION['email'])){
         header('Location: index.php');
-    ;}else if($_SESSION['id_nivel'] == 2){
+    ;}else if($_SESSION['id_nivel'] != 1){
         header('Location: home.php');
     }else{
 ?>
@@ -75,14 +75,14 @@
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <!-- <li><a href="categorias.php">
+                <li><a href="categorias.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Categorias</span>
                 </a></li>
                 <li><a href="formas.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Formas</span>
-                </a></li> -->
+                </a></li>
                 <li><a href="#">
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
