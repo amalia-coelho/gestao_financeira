@@ -68,7 +68,7 @@ function emailValidate(){
     
 }
 function yearValidate(){
-    if(campos[3].value <14 || campos[3].value >100)
+    if(campos[3].value <10 || campos[3].value >120)
     {
         setError(3);
     }
