@@ -43,8 +43,11 @@
                 dataType: "html"
 
                 }).done(function(resposta){
-                    // exibir os lançamentos
-                    $('#exibe').html(resposta);
+                    // Notificar o cadastro
+                    alert(resposta);
+
+                    // Exibir o lançamento
+                    $('.activity-data').load(' .activity-data');
 
                     // Limpar os inputs
                     $('#responsavel').val(' ');
@@ -216,7 +219,7 @@
                             <select class="form-select" id="pagamento">
                                 <option>Pagamento</option>
                                 <?php 
-                                    require('php/conexao.php');
+                                    include('php/conexao.php');
                                     $option = "";
                                     $sql = "SELECT * FROM tb_forma_pagto";
 
@@ -231,7 +234,7 @@
                             <select class="form-select" id="responsavel">
                                 <option>Responsável</option>
                                 <?php 
-                                    require('php/conexao.php');
+                                    include('php/conexao.php');
                                     $option = "";
                                     $sql = 'SELECT * FROM tb_responsavel';
 
@@ -268,7 +271,14 @@
 								</tr>
 							</thead>
 							<tbody id="exibe">
-                                <!-- lancamentos -->
+                                <?php
+                                    include('php/conexao.php');
+
+                                    $sql = "SELECT * FROM tb_lancamento WHERE id_usuario = ".$_SESSION['cd'];
+                                    foreach ($conn->query($sql) as $row){
+                                        echo "<tr><td>".$row['ds_descricao']."</td><td>".$row['vl_lancamentos']."</td><td>".$row['dt_lancamento']."</td><td>".$row['id_categoria']."</td><td>".$row['id_forma_pagto']."</td><td>".$row['id_responsavel']."</td><td>Futuramente...</td></tr>";
+                                }
+                                ?>   
 							</tbody>
 						</table>
                 </div>
