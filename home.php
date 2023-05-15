@@ -23,11 +23,13 @@
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
+    <!-- IMPORT JQUERY -->
+    <script src="js/jquery-3.6.1.min.js"></script>
+
     <!-- JQUERY AJAX -->
 	<script type="text/javascript">
 		$(document).ready(function(){
             $("#concluir").click(function(){
-
                 // declaração de variáveis
                 var descricao = $('#descricao').val();
                 var data = $('#data').val();
@@ -43,6 +45,9 @@
                 dataType: "html"
 
                 }).done(function(resposta){
+                    //fechar o modal
+                    $('#fechar').click();
+
                     // Notificar o cadastro
                     alert(resposta);
 
@@ -56,9 +61,6 @@
                     $('#valor').val(' ');
                     $('#data').val(' ');
                     $('#descricao').val(' ');
-
-                    //fechar o modal
-                    $('#fechar').click();
                 }).fail(function(jqXHR, textStatus ) {
                     console.log("Request failed: " + textStatus);
                 });
@@ -258,7 +260,7 @@
                 </div>
 
                 <div class="activity-data">
-					<table class="table" style="">
+					<table class="table">
 							<thead class="thead-dark bg-dark text-white">
 								<tr>
 									<th scope="col">Descrição</th>
@@ -275,8 +277,27 @@
                                     include('php/conexao.php');
 
                                     $sql = "SELECT * FROM tb_lancamento WHERE id_usuario = ".$_SESSION['cd'];
+                                    
                                     foreach ($conn->query($sql) as $row){
-                                        echo "<tr><td>".$row['ds_descricao']."</td><td>".$row['vl_lancamentos']."</td><td>".$row['dt_lancamento']."</td><td>".$row['id_categoria']."</td><td>".$row['id_forma_pagto']."</td><td>".$row['id_responsavel']."</td><td>Futuramente...</td></tr>";
+                                        // ID_CATEGORIA
+                                        $stmt_categoria = $conn->prepare("SELECT nm_categoria FROM tb_categoria WHERE cd_categoria = :categoria");
+                                        $stmt_categoria->bindValue(':categoria', $row['id_categoria']);
+                                        $stmt_categoria->execute();
+                                        $categoria = $stmt_categoria->fetchColumn();
+
+                                        // ID_FORMA_PAGTO
+                                        $stmt_pagamento = $conn->prepare("SELECT nm_forma_pagto FROM tb_forma_pagto WHERE cd_forma_pagto = :pagamento");
+                                        $stmt_pagamento->bindValue(':pagamento', $row['id_forma_pagto']);
+                                        $stmt_pagamento->execute();
+                                        $pagamento = $stmt_pagamento->fetchColumn();
+                                        
+                                        // ID__RESPONSAVEL
+                                        $stmt_responsavel = $conn->prepare("SELECT nm_responsavel FROM tb_responsavel WHERE cd_responsavel = :responsavel");
+                                        $stmt_responsavel->bindValue(':responsavel', $row['id_responsavel']);
+                                        $stmt_responsavel->execute();
+                                        $responsavel = $stmt_responsavel->fetchColumn();
+
+                                        echo "<tr><td>".$row['ds_lancamento']."</td><td>".$row['vl_lancamentos']."</td><td>".$row['dt_lancamento']."</td><td>".$categoria."</td><td>".$pagamento."</td><td>".$responsavel."</td><td>Futuramente...</td></tr>";
                                 }
                                 ?>   
 							</tbody>
@@ -289,7 +310,6 @@
     <script src="js/toggle.js"></script>
     <!-- BootStrap SRC -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>>
 </body>

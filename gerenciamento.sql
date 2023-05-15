@@ -9,7 +9,7 @@ create table tb_nivel(
 create table tb_responsavel(
 	cd_responsavel int primary key auto_increment,
 	nm_responsavel varchar(250),
-	id_usuario_busca int not null
+	id_usuario_busca int
 );
 
 create table tb_forma_pagto(
@@ -42,7 +42,7 @@ create table tb_lancamento(
 	vl_lancamentos decimal(8,2) not null,
 	nr_parcela_atual int,
 	nr_parcela_total int,
-	dt_vencimento date not null,
+	dt_vencimento date,
 	id_usuario int,
 	id_categoria int,
 	id_forma_pagto int not null,
@@ -80,12 +80,12 @@ INSERT INTO tb_categoria (nm_categoria) VALUES ('Investimentos');
 INSERT INTO tb_categoria (nm_categoria) VALUES ('Roupas');
 
 -- Formas de pagamentos
-INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('pix');
-INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('cartao de credito');
-INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('cartao de debito');
-INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('boleto');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('Pix');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('Cartão de crédito');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('Cartão de debito');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('Boleto');
 
 -- Responsavel
-INSERT INTO tb_responsavel (nm_responsavel) VALUES ('Etec de itanhaém');
-INSERT INTO tb_responsavel (nm_responsavel) VALUES ('Bradesco');
-INSERT INTO tb_responsavel (nm_responsavel) VALUES ('Motion Fit');
+INSERT INTO tb_responsavel (nm_responsavel, id_usuario_busca) VALUES ('Etec de itanhaém', 1) ;
+INSERT INTO tb_responsavel (nm_responsavel, id_usuario_busca) VALUES ('Bradesco', 1);
+INSERT INTO tb_responsavel (nm_responsavel, id_usuario_busca) VALUES ('Motion Fit', 1);
