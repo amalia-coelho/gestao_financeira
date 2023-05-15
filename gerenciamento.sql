@@ -9,7 +9,7 @@ create table tb_nivel(
 create table tb_responsavel(
 	cd_responsavel int primary key auto_increment,
 	nm_responsavel varchar(250),
-	id_usuario_busca int not null
+	id_usuario_busca int
 );
 
 create table tb_forma_pagto(
@@ -42,7 +42,7 @@ create table tb_lancamento(
 	vl_lancamentos decimal(8,2) not null,
 	nr_parcela_atual int,
 	nr_parcela_total int,
-	dt_vencimento date not null,
+	dt_vencimento date,
 	id_usuario int,
 	id_categoria int,
 	id_forma_pagto int not null,
@@ -71,3 +71,21 @@ INSERT INTO tb_nivel (nm_nivel) VALUES ('Dependente');
 INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade, id_nivel) VALUES ('Amália', 'Coelho', 'amaliacoelho@gmail.com', 'oioioioi', 17, 1);
 INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade, id_nivel) VALUES ('Eric', 'Junokas', 'ericjunokas@gmail.com', 'oioioioi', 17, 1);
 INSERT INTO tb_usuario (nm_usuario, sn_usuario, ds_login, ds_senha, nr_idade) VALUES ('Larissa', 'Pergentino', 'lalalinda@gmail.com', 'lalalinda', 17);
+
+-- Categorias
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Mercado');
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Eletrônicos');
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Suplementos');
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Investimentos');
+INSERT INTO tb_categoria (nm_categoria) VALUES ('Roupas');
+
+-- Formas de pagamentos
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('Pix');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('Cartão de crédito');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('Cartão de debito');
+INSERT INTO tb_forma_pagto (nm_forma_pagto) VALUES ('Boleto');
+
+-- Responsavel
+INSERT INTO tb_responsavel (nm_responsavel, id_usuario_busca) VALUES ('Etec de itanhaém', 1) ;
+INSERT INTO tb_responsavel (nm_responsavel, id_usuario_busca) VALUES ('Bradesco', 1);
+INSERT INTO tb_responsavel (nm_responsavel, id_usuario_busca) VALUES ('Motion Fit', 1);

@@ -18,9 +18,9 @@
                     ':cd_usuario' => $dependente['cd_usuario']
                 ));
                 
-                echo "<p>Usuário cadastrado como dependente!</p><meta http-equiv='refresh' content='1'>";
+                echo "Usuário cadastrado como dependente!";
             }else{
-                echo "<p>Email incorreto ou usuário não cadastrado!</p><meta http-equiv='refresh' content='1'>";
+                echo "Usuário não cadastrado ou email incorreto!";
             }
     } catch(PDOException $e) {
         echo 'ERROR: ' . $e->getMessage();

@@ -14,15 +14,60 @@
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="css/homepag.css">
     <!-- BOOSTRAP -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 
     <!----===== BootStrap 5 CSS ===== -->
-
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!-- IMPORT JQUERY -->
+    <script src="js/jquery-3.6.1.min.js"></script>
+
+    <!-- JQUERY AJAX -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+            $("#concluir").click(function(){
+                // declaração de variáveis
+                var descricao = $('#descricao').val();
+                var data = $('#data').val();
+                var valor = $('#valor').val();
+                var categoria = $('#categoria').val();
+                var pagamento = $('#pagamento').val();
+                var responsavel = $('#responsavel').val();
+
+                $.ajax({
+                url: "php/script_lancamento.php",
+                type: "POST",
+                data: "descricao="+descricao+"&data="+data+"&valor="+valor+"&categoria="+categoria+"&pagamento="+pagamento+"&responsavel="+responsavel,
+                dataType: "html"
+
+                }).done(function(resposta){
+                    //fechar o modal
+                    $('#fechar').click();
+
+                    // Notificar o cadastro
+                    alert(resposta);
+
+                    // Exibir o lançamento
+                    $('.activity-data').load(' .activity-data');
+
+                    // Limpar os inputs
+                    $('#responsavel').val(' ');
+                    $('#pagamento').val(' ');
+                    $('#categoria').val(' ');
+                    $('#valor').val(' ');
+                    $('#data').val(' ');
+                    $('#descricao').val(' ');
+                }).fail(function(jqXHR, textStatus ) {
+                    console.log("Request failed: " + textStatus);
+                });
+            });
+		});
+	</script>
+    
 </head>
 <body>
     <nav>
@@ -52,12 +97,18 @@
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
                 </a></li>
-                <li><a href="dependentes.php">
-                    <i class="uil uil-comments"></i>
-                    <span class="link-name">Dependente</span>
-                </a></li>
+                <?php 
+                    if($_SESSION['id_nivel'] == 1){
+                    ?>  
+                    <li><a href="dependentes.php">
+                        <i class="uil uil-comments"></i>
+                        <span class="link-name">Dependente</span>
+                    </a></li>
+                    <?php
+                    }
+                ?>
             </ul>
-            <ul class="logout-mode">                <li><a href="logout.php">
+        <ul class="logout-mode"><li><a href="logout.php">
                 <i class="uil uil-signout"></i>
                 <span class="link-name">Logout</span>
             </a></li>
@@ -120,9 +171,9 @@
                     <span class="text">Gestões recentes</span>
                 </div>
 
-                                    <!-- Botão para acionar modal -->
+            <!-- Botão para acionar modal -->
             <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">
-              Adicionar nova gestão
+              Adicionar registro
             </button>
 
             <!-- Modal -->
@@ -137,39 +188,69 @@
                   </div>
                   <div class="modal-body">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
+                            <input type="text" class="form-control form-control-sm editora" id="descricao" name="ds_lancamento">
+                            <label style="color: #000" for="ds_lancamento">Descrição</label>
                 
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
+                            <input type="date" class="form-control form-control-sm editora" id="data" name="dt_lancamento">
+                            <label style="color: #000" for="dt_lancamento">Data</label>
                 
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
+                            <input type="number" class="form-control form-control-sm editora" id="valor" name="vl_lancamento">
+                            <label style="color: #000" for="vl_lancamento">Valor</label>
                 
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
+                        <div class="mb-3">
+                            <select class="form-select" id="categoria">
+                                <option value="" date-default disable selected>categoria</option>
+                                <?php 
+                                    require('php/conexao.php');
+                                    $option = "";
+                                    $sql = 'SELECT * FROM tb_categoria';
+
+                                    foreach ($conn->query($sql) as $row){
+                                        $option .= "<option value='".$row['cd_categoria']."'>".$row['nm_categoria']."</option>";
+                                    }
+                                    echo $option;
+                                ?>
+                            </select>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
+                        <div class="mb-3">
+                            <select class="form-select" id="pagamento">
+                                <option>Pagamento</option>
+                                <?php 
+                                    include('php/conexao.php');
+                                    $option = "";
+                                    $sql = "SELECT * FROM tb_forma_pagto";
+
+                                    foreach ($conn->query($sql) as $row){
+                                        $option .= "<option value='".$row['cd_forma_pagto']."'>".$row['nm_forma_pagto']."</option>";
+                                    }
+                                    echo $option;
+                                ?>
+                            </select>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
+                        <div class="mb-3">
+                            <select class="form-select" id="responsavel">
+                                <option>Responsável</option>
+                                <?php 
+                                    include('php/conexao.php');
+                                    $option = "";
+                                    $sql = 'SELECT * FROM tb_responsavel';
+
+                                    foreach ($conn->query($sql) as $row){
+                                        $option .= "<option value='".$row['cd_responsavel']."'>".$row['nm_responsavel']."</option>";
+                                    }
+                                    echo $option;
+                                ?>
+                            </select>
                         </div>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-danger">Concluir</button>
-                      <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                      <button type="button" id="concluir" class="btn btn-danger">Concluir</button>
+                      <button type="button" id="fechar" class="btn btn-dark" data-dismiss="modal">Fechar</button>
                   </div>
                 </div>
               </div>
@@ -179,46 +260,48 @@
                 </div>
 
                 <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">Name</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                    </div>
-                    <div class="data email">
-                        <span class="data-title">Email</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                    </div>
-                    <div class="data joined">
-                        <span class="data-title">Joined</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                    </div>
-                    <div class="data type">
-                        <span class="data-title">Type</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                    </div>
-                    <div class="data status">
-                        <span class="data-title">Status</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                    </div>
+					<table class="table">
+							<thead class="thead-dark bg-dark text-white">
+								<tr>
+									<th scope="col">Descrição</th>
+									<th scope="col">Valor</th>
+									<th scope="col">Data</th>
+									<th scope="col">Categoria</th>
+									<th scope="col">Pagamento</th>
+									<th scope="col">Responsavel</th>
+									<th scope="col">Ações</th>
+								</tr>
+							</thead>
+							<tbody id="exibe">
+                                <?php
+                                    include('php/conexao.php');
+
+                                    $sql = "SELECT * FROM tb_lancamento WHERE id_usuario = ".$_SESSION['cd'];
+                                    
+                                    foreach ($conn->query($sql) as $row){
+                                        // ID_CATEGORIA
+                                        $stmt_categoria = $conn->prepare("SELECT nm_categoria FROM tb_categoria WHERE cd_categoria = :categoria");
+                                        $stmt_categoria->bindValue(':categoria', $row['id_categoria']);
+                                        $stmt_categoria->execute();
+                                        $categoria = $stmt_categoria->fetchColumn();
+
+                                        // ID_FORMA_PAGTO
+                                        $stmt_pagamento = $conn->prepare("SELECT nm_forma_pagto FROM tb_forma_pagto WHERE cd_forma_pagto = :pagamento");
+                                        $stmt_pagamento->bindValue(':pagamento', $row['id_forma_pagto']);
+                                        $stmt_pagamento->execute();
+                                        $pagamento = $stmt_pagamento->fetchColumn();
+                                        
+                                        // ID__RESPONSAVEL
+                                        $stmt_responsavel = $conn->prepare("SELECT nm_responsavel FROM tb_responsavel WHERE cd_responsavel = :responsavel");
+                                        $stmt_responsavel->bindValue(':responsavel', $row['id_responsavel']);
+                                        $stmt_responsavel->execute();
+                                        $responsavel = $stmt_responsavel->fetchColumn();
+
+                                        echo "<tr><td>".$row['ds_lancamento']."</td><td>".$row['vl_lancamentos']."</td><td>".$row['dt_lancamento']."</td><td>".$categoria."</td><td>".$pagamento."</td><td>".$responsavel."</td><td>Futuramente...</td></tr>";
+                                }
+                                ?>   
+							</tbody>
+						</table>
                 </div>
             </div>
         </div>

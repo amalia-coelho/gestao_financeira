@@ -5,11 +5,6 @@ const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]
 
 //botão de login
 
-login.addEventListener('click', (event) =>{
-    event.preventDefault;
-    emailValidate();
-    mainPasswordValidate();
-})
 
 //erros vermelhos
 function setError(index){

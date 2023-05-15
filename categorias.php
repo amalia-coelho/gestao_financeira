@@ -31,12 +31,12 @@
                 <img src="img/startech-logo.png" alt="Logo">
             </div>
             
-            <span class="logo_name">StarTeaaaaach</span>
+            <span class="logo_name">StarTech</span>
         </div>
 
         <div class="menu-items">
             <ul class="nav-links">
-            <li><a href="/home.php">
+            <li><a href="home.php">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
@@ -52,10 +52,16 @@
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
                 </a></li>
-                <li><a href="dependentes.php">
-                    <i class="uil uil-comments"></i>
-                    <span class="link-name">Dependente</span>
-                </a></li>
+                <?php 
+                    if($_SESSION['id_nivel'] == 1){
+                    ?>  
+                    <li><a href="dependentes.php">
+                        <i class="uil uil-comments"></i>
+                        <span class="link-name">Dependente</span>
+                    </a></li>
+                    <?php
+                    }
+                ?>
             </ul>
             <ul class="logout-mode"> 
                 <li><a href="logout.php">
@@ -228,7 +234,7 @@
     <script src="js/toggle.js"></script>
     <!-- BootStrap SRC -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>>
 </body>

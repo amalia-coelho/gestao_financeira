@@ -2,7 +2,7 @@
     session_start();
     if (!isset($_SESSION['email'])){
         header('Location: index.php');
-    ;}else if($_SESSION['id_nivel'] == 2){
+    ;}else if($_SESSION['id_nivel'] != 1){
         header('Location: home.php');
     }else{
 ?>
@@ -36,7 +36,9 @@
                 dataType: "html"
 
                 }).done(function(resposta){
-                    $('#exibe').html(resposta);
+                    $("#fechar").click();
+                    alert(resposta);
+                    $('.activity-data').load(' .activity-data');
                     $("#email").val(" ");
                 }).fail(function(jqXHR, textStatus ) {
                     console.log("Request failed: " + textStatus);
@@ -75,14 +77,14 @@
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <!-- <li><a href="categorias.php">
+                <li><a href="categorias.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Categorias</span>
                 </a></li>
                 <li><a href="formas.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Formas</span>
-                </a></li> -->
+                </a></li>
                 <li><a href="#">
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
@@ -161,22 +163,19 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content ">
-                  <div class="modal-header bg-danger text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de dependentes</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content ">
+                        <div class="modal-header bg-danger text-light">
+                            <h5 class="modal-title" id="exampleModalLabel">Cadastro de dependentes</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                   </div>
                   <div class="modal-body">
-                        <p>Adicione o email do seu dependente no campo abaixo:</p>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm email" id="email" placeholder="name@example.com" name="email">
-                            <label style="color: #000" for="email">Email</label>
-                        </div>
-                        <div id="exibe">
-                            <!-- Exibe as informações -->
+                      <p>Adicione o email do seu dependente no campo abaixo:</p>
+                      <div class="form-floating mb-3">
+                          <input type="text" class="form-control form-control-sm email" id="email" placeholder="name@example.com" name="email">
+                          <label style="color: #000" for="email">Email</label>
                         </div>
                   </div>
                   <div class="modal-footer">
@@ -200,14 +199,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
-                            include("php/conexao.php");
-                            $sql = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
+                            <?php
+                                include('php/conexao.php');
+                                $sql = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
 
-                            foreach ($conn->query($sql) as $row){
-                                echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td>Futuramente...</td></tr>";
-                            }
-                        ?>
+                                foreach ($conn->query($sql) as $row){
+                                    echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td>Futuramente...</td></tr>";
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>

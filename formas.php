@@ -52,10 +52,16 @@
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
                 </a></li>
-                <li><a href="dependentes.php">
-                    <i class="uil uil-comments"></i>
-                    <span class="link-name">Dependente</span>
-                </a></li>
+                <?php 
+                    if($_SESSION['id_nivel'] == 1){
+                    ?>  
+                    <li><a href="dependentes.php">
+                        <i class="uil uil-comments"></i>
+                        <span class="link-name">Dependente</span>
+                    </a></li>
+                    <?php
+                    }
+                ?>
             </ul>
             <ul class="logout-mode">                <li><a href="#">
                 <i class="uil uil-signout"></i>
