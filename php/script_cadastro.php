@@ -23,9 +23,9 @@
                 ':nivel' => 1
             ));
             
-            $stmt_usuario = $conn->prepare("SELECT * FROM tb_usuario WHERE ds_login = :email");
-            $stmt_usuario->bindValue(':email', $_POST['email']);
-            $stmt_usuario->execute();
+            $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE ds_login = :email");
+            $stmt->bindValue(':email', $_POST['email']);
+            $stmt->execute();
             
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 

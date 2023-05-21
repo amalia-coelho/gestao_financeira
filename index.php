@@ -123,13 +123,13 @@
                   <button  type="button" id="validar" >Finalizar Cadastro</button>
                 </div>
             </div>
+            <div id="exibe">
+          
+            </div>
             <div class="login-button">
                 <p>Possui uma conta? <a href="login.php">Entrar</a></p>
             </div>
         </div>
-  </div>
-  <div id="exibe">
-
   </div>
         <script src="js/cadastro.js"></script>
     </body>
