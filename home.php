@@ -55,12 +55,14 @@
                     $('.activity-data').load(' .activity-data');
 
                     // Limpar os inputs
-                    $('#responsavel').val(' ');
-                    $('#pagamento').val(' ');
-                    $('#categoria').val(' ');
                     $('#valor').val(' ');
                     $('#data').val(' ');
                     $('#descricao').val(' ');
+
+                    //resetar os select
+                    $('#pagamento option:first').prop('selected',true);
+                    $('#categoria option:first').prop('selected',true);
+                    $('#responsavel option:first').prop('selected',true);
                 }).fail(function(jqXHR, textStatus ) {
                     console.log("Request failed: " + textStatus);
                 });
@@ -165,143 +167,197 @@
             </div>
             <div class="overview activity">
                 <div class="add">
-                    
-                <div class="title">
-                    <i class="uil uil-tachometer-fast-alt"></i>
-                    <span class="text">Gestões recentes</span>
-                </div>
+                    <div class="title">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <span class="text">Gestões recentes</span>
+                    </div>
 
-            <!-- Botão para acionar modal -->
-            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">
-              Adicionar registro
-            </button>
+                    <!-- Botão para acionar modal -->
+                    <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">Adicionar registro</button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content ">
-                  <div class="modal-header bg-danger text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Gestão Financeira</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="descricao" name="ds_lancamento">
-                            <label style="color: #000" for="ds_lancamento">Descrição</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="date" class="form-control form-control-sm editora" id="data" name="dt_lancamento">
-                            <label style="color: #000" for="dt_lancamento">Data</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="number" class="form-control form-control-sm editora" id="valor" name="vl_lancamento">
-                            <label style="color: #000" for="vl_lancamento">Valor</label>
-                
-                        </div>
-                        <div class="mb-3">
-                            <select class="form-select" id="categoria">
-                                <option value="" date-default disable selected>categoria</option>
-                                <?php 
-                                    require('php/conexao.php');
-                                    $option = "";
-                                    $sql = 'SELECT * FROM tb_categoria';
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content ">
+                                <div class="modal-header bg-danger text-light">
+                                    <h5 class="modal-title" id="exampleModalLabel">Gestão Financeira</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control form-control-sm editora" id="descricao" name="ds_lancamento">
+                                            <label style="color: #000" for="ds_lancamento">Descrição</label>
+                                
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="date" class="form-control form-control-sm editora" id="data" name="dt_lancamento">
+                                            <label style="color: #000" for="dt_lancamento">Data</label>
+                                
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control form-control-sm editora" id="valor" name="vl_lancamento">
+                                            <label style="color: #000" for="vl_lancamento">Valor</label>
+                                
+                                        </div>
+                                        <div class="mb-3">
+                                            <select class="form-select" id="categoria">
+                                                <option value="" date-default disable selected>categoria</option>
+                                                <?php 
+                                                    require('php/conexao.php');
+                                                    $option = "";
+                                                    $sql = 'SELECT * FROM tb_categoria';
 
-                                    foreach ($conn->query($sql) as $row){
-                                        $option .= "<option value='".$row['cd_categoria']."'>".$row['nm_categoria']."</option>";
-                                    }
-                                    echo $option;
-                                ?>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <select class="form-select" id="pagamento">
-                                <option>Pagamento</option>
-                                <?php 
-                                    include('php/conexao.php');
-                                    $option = "";
-                                    $sql = "SELECT * FROM tb_forma_pagto";
+                                                    foreach ($conn->query($sql) as $row){
+                                                        $option .= "<option value='".$row['cd_categoria']."'>".$row['nm_categoria']."</option>";
+                                                    }
+                                                    echo $option;
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <select class="form-select" id="pagamento">
+                                                <option>Pagamento</option>
+                                                <?php 
+                                                    include('php/conexao.php');
+                                                    $option = "";
+                                                    $sql = "SELECT * FROM tb_forma_pagto";
 
-                                    foreach ($conn->query($sql) as $row){
-                                        $option .= "<option value='".$row['cd_forma_pagto']."'>".$row['nm_forma_pagto']."</option>";
-                                    }
-                                    echo $option;
-                                ?>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <select class="form-select" id="responsavel">
-                                <option>Responsável</option>
-                                <?php 
-                                    include('php/conexao.php');
-                                    $option = "";
-                                    $sql = 'SELECT * FROM tb_responsavel';
+                                                    foreach ($conn->query($sql) as $row){
+                                                        $option .= "<option value='".$row['cd_forma_pagto']."'>".$row['nm_forma_pagto']."</option>";
+                                                    }
+                                                    echo $option;
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <select class="form-select" id="responsavel">
+                                                <option>Responsável</option>
+                                                <?php 
+                                                    include('php/conexao.php');
+                                                    $option = "";
+                                                    $sql = 'SELECT * FROM tb_responsavel';
 
-                                    foreach ($conn->query($sql) as $row){
-                                        $option .= "<option value='".$row['cd_responsavel']."'>".$row['nm_responsavel']."</option>";
-                                    }
-                                    echo $option;
-                                ?>
-                            </select>
+                                                    foreach ($conn->query($sql) as $row){
+                                                        $option .= "<option value='".$row['cd_responsavel']."'>".$row['nm_responsavel']."</option>";
+                                                    }
+                                                    echo $option;
+                                                ?>
+                                            </select>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="concluir" class="btn btn-danger">Concluir</button>
+                                    <button type="button" id="fechar" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
                         </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" id="concluir" class="btn btn-danger">Concluir</button>
-                      <button type="button" id="fechar" class="btn btn-dark" data-dismiss="modal">Fechar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-<!-- Fim do modal -->
+                    </div>
+                    <!-- Fim do modal -->
                 </div>
 
                 <div class="activity-data">
 					<table class="table">
-							<thead class="thead-dark bg-dark text-white">
-								<tr>
-									<th scope="col">Descrição</th>
-									<th scope="col">Valor</th>
-									<th scope="col">Data</th>
-									<th scope="col">Categoria</th>
-									<th scope="col">Pagamento</th>
-									<th scope="col">Responsavel</th>
-									<th scope="col">Ações</th>
-								</tr>
-							</thead>
-							<tbody id="exibe">
-                                <?php
-                                    include('php/conexao.php');
+                        <thead class="thead-dark bg-dark text-white">
+                            <tr>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Pagamento</th>
+                                <th scope="col">Responsavel</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exibe">
+                            <?php
+                                include('php/conexao.php');
 
-                                    $sql = "SELECT * FROM tb_lancamento WHERE id_usuario = ".$_SESSION['cd'];
+                                $sql = "SELECT * FROM tb_lancamento WHERE id_usuario = ".$_SESSION['cd'];
+                                
+                                foreach ($conn->query($sql) as $row){
+                                    // ID_CATEGORIA
+                                    $stmt_categoria = $conn->prepare("SELECT nm_categoria FROM tb_categoria WHERE cd_categoria = :categoria");
+                                    $stmt_categoria->bindValue(':categoria', $row['id_categoria']);
+                                    $stmt_categoria->execute();
+                                    $categoria = $stmt_categoria->fetchColumn();
+
+                                    // ID_FORMA_PAGTO
+                                    $stmt_pagamento = $conn->prepare("SELECT nm_forma_pagto FROM tb_forma_pagto WHERE cd_forma_pagto = :pagamento");
+                                    $stmt_pagamento->bindValue(':pagamento', $row['id_forma_pagto']);
+                                    $stmt_pagamento->execute();
+                                    $pagamento = $stmt_pagamento->fetchColumn();
                                     
-                                    foreach ($conn->query($sql) as $row){
-                                        // ID_CATEGORIA
-                                        $stmt_categoria = $conn->prepare("SELECT nm_categoria FROM tb_categoria WHERE cd_categoria = :categoria");
-                                        $stmt_categoria->bindValue(':categoria', $row['id_categoria']);
-                                        $stmt_categoria->execute();
-                                        $categoria = $stmt_categoria->fetchColumn();
+                                    // ID__RESPONSAVEL
+                                    $stmt_responsavel = $conn->prepare("SELECT nm_responsavel FROM tb_responsavel WHERE cd_responsavel = :responsavel");
+                                    $stmt_responsavel->bindValue(':responsavel', $row['id_responsavel']);
+                                    $stmt_responsavel->execute();
+                                    $responsavel = $stmt_responsavel->fetchColumn();
 
-                                        // ID_FORMA_PAGTO
-                                        $stmt_pagamento = $conn->prepare("SELECT nm_forma_pagto FROM tb_forma_pagto WHERE cd_forma_pagto = :pagamento");
-                                        $stmt_pagamento->bindValue(':pagamento', $row['id_forma_pagto']);
-                                        $stmt_pagamento->execute();
-                                        $pagamento = $stmt_pagamento->fetchColumn();
-                                        
-                                        // ID__RESPONSAVEL
-                                        $stmt_responsavel = $conn->prepare("SELECT nm_responsavel FROM tb_responsavel WHERE cd_responsavel = :responsavel");
-                                        $stmt_responsavel->bindValue(':responsavel', $row['id_responsavel']);
-                                        $stmt_responsavel->execute();
-                                        $responsavel = $stmt_responsavel->fetchColumn();
+                                    echo "<tr><td>".$row['ds_lancamento']."</td><td>".$row['vl_lancamentos']."</td><td>".$row['dt_lancamento']."</td><td>".$categoria."</td><td>".$pagamento."</td><td>".$responsavel."</td><td>Futuramente...</td></tr>";
+                            }
+                            ?>   
+                        </tbody>
+                    </table>
+                    <?php
+                        if ($_SESSION['id_nivel'] == 1) {
+                            $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE id_responsavel = :id");
+                            $stmt->bindValue(':id', $_SESSION['cd']);
+                            $stmt->execute();
 
-                                        echo "<tr><td>".$row['ds_lancamento']."</td><td>".$row['vl_lancamentos']."</td><td>".$row['dt_lancamento']."</td><td>".$categoria."</td><td>".$pagamento."</td><td>".$responsavel."</td><td>Futuramente...</td></tr>";
+                            $dependentes = $stmt->fetch(PDO::FETCH_ASSOC);
+                            if ($dependentes) {
+                                $sql_dependente = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
+
+                                foreach ($conn->query($sql_dependente) as $info_dependente) {?>
+                                <div class="table dependentes">
+                                    <h3><?php echo $info_dependente['nm_usuario'] . " " . $info_dependente['sn_usuario']; ?></h3>
+                                        <table class="table">
+                                            <thead class="thead-dark bg-dark text-white">
+                                                <tr>
+                                                    <th scope="col">Descrição</th>
+                                                    <th scope="col">Valor</th>
+                                                    <th scope="col">Data</th>
+                                                    <th scope="col">Categoria</th>
+                                                    <th scope="col">Pagamento</th>
+                                                    <th scope="col">Responsavel</th>
+                                                </tr>
+                                            </thead>
+                                        <tbody>
+                                        <?php
+                                            $sql_lancamento = "SELECT * FROM tb_lancamento WHERE id_usuario = ".$info_dependente['cd_usuario'];
+                                            
+                                            foreach ($conn->query($sql_lancamento) as $info_lancamento) {
+                                                // ID_CATEGORIA
+                                                $stmt_categoria = $conn->prepare("SELECT nm_categoria FROM tb_categoria WHERE cd_categoria = :categoria");
+                                                $stmt_categoria->bindValue(':categoria', $info_lancamento['id_categoria']);
+                                                $stmt_categoria->execute();
+                                                $categoria = $stmt_categoria->fetchColumn();
+
+                                                // ID_FORMA_PAGTO
+                                                $stmt_pagamento = $conn->prepare("SELECT nm_forma_pagto FROM tb_forma_pagto WHERE cd_forma_pagto = :pagamento");
+                                                $stmt_pagamento->bindValue(':pagamento', $info_lancamento['id_forma_pagto']);
+                                                $stmt_pagamento->execute();
+                                                $pagamento = $stmt_pagamento->fetchColumn();
+
+                                                // ID__RESPONSAVEL
+                                                $stmt_responsavel = $conn->prepare("SELECT nm_responsavel FROM tb_responsavel WHERE cd_responsavel = :responsavel");
+                                                $stmt_responsavel->bindValue(':responsavel', $info_lancamento['id_responsavel']);
+                                                $stmt_responsavel->execute();
+                                                $responsavel = $stmt_responsavel->fetchColumn();
+
+                                                echo "<tr><td>" . $info_lancamento['ds_lancamento'] . "</td><td>" . $info_lancamento['vl_lancamentos'] . "</td><td>" . $info_lancamento['dt_lancamento'] . "</td><td>" . $categoria . "</td><td>" . $pagamento . "</td><td>" . $responsavel . "</td></tr>";
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <?php
                                 }
-                                ?>   
-							</tbody>
-						</table>
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>
