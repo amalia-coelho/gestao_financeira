@@ -1,3 +1,12 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
 <?php
     try{
         session_start();
@@ -15,11 +24,25 @@
                 $_SESSION['email'] = $_POST['email'];
                 $_SESSION['nome'] = $usuario['nm_usuario'];
                 $_SESSION['cd'] = $usuario['cd_usuario'];
+                $_SESSION['id_nivel'] = $usuario['id_nivel'];
                 echo "<meta http-equiv='refresh' content='1'>";
             }else{
+
+                    ?>
+                    <script type="text/javascript">
+                    $("#myModal").hide();
+                    </script>
+                    <?php
+
                 echo "Senha incorreta!";
             }
         }else{
+                    ?>
+                    <script type="text/javascript">
+                    $("#myModal").hide();
+                    </script>
+                    <?php
+              
             echo "Usuário não encontrado!";
         }
     } catch(PDOException $e) {
@@ -27,3 +50,7 @@
         echo "<br>".$stmt->rowCount();
     }
 ?>
+
+</body>
+</html>
+
