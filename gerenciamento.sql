@@ -24,6 +24,11 @@ create table tb_categoria(
 	id_usuario_busca int
 );
 
+create table tb_tipo_registro(
+	cd_tipo_registro int primary key auto_increment,
+	nm_tipo_registro varchar(250)
+);
+
 create table tb_usuario(
 	cd_usuario int primary key auto_increment,
 	nm_usuario varchar(100),
@@ -43,6 +48,7 @@ create table tb_lancamento(
 	nr_parcela_atual int,
 	nr_parcela_total int,
 	dt_vencimento date,
+	id_tipo_registro int,
 	id_usuario int,
 	id_categoria int,
 	id_forma_pagto int not null,
@@ -60,8 +66,13 @@ alter table tb_lancamento add foreign key fk_lancamento_responsavel(id_responsav
 alter table tb_responsavel add foreign key fk_responsavel_usuario(id_usuario_busca) references tb_usuario(cd_usuario);
 alter table tb_forma_pagto add foreign key fk_formaPagto_usuario(id_usuario_busca) references tb_usuario(cd_usuario);
 alter table tb_categoria add foreign key fk_categoria_usuario(id_usuario_busca) references tb_usuario(cd_usuario);
+alter table tb_lancamento add foreign key fk_lancamento_registro(id_tipo_registro) references tb_tipo_registro(cd_tipo_registro);
 
 -- CADASTROS PADRÃO
+
+-- Tipos de registros
+INSERT INTO tb_tipo_registro (nm_tipo_registro) VALUES('Renda');
+INSERT INTO tb_tipo_registro (nm_tipo_registro) VALUES('Gasto');
 
 -- Niveis
 INSERT INTO tb_nivel (nm_nivel) VALUES ('Responsavel');

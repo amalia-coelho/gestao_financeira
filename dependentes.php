@@ -136,17 +136,46 @@
                     <div class="box box1">
                         <i class="uil uil-thumbs-up"></i>
                         <span class="text">Total Money</span>
-                        <span class="number">50,000</span>
+                        <?php
+                            require('php/conexao.php');
+                            $total = 0;
+                            $sql_total = "SELECT vl_lancamentos, id_tipo_registro FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd'];
+
+                            foreach ($conn->query($sql_total) as $row){
+                                if ($row['id_tipo_registro'] == 1){
+                                    $total += $row['vl_lancamentos'];
+                                }else{
+                                    $total -= $row['vl_lancamentos'];
+                                }
+                            }
+                            echo "<span class='number'>$".number_format($total, 2, ',', '.')."</span>";
+                            ?>
                     </div>
                     <div class="box box2">
                         <i class="uil uil-comments"></i>
                         <span class="text">Entrada</span>
-                        <span class="number">40,000</span>
+                        <?php
+                            $ganho = 0;
+                            $sql_ganho = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 1";
+
+                            foreach ($conn->query($sql_ganho) as $row){
+                                $ganho += $row['vl_lancamentos'];
+                            }
+                            echo "<span class='number'>$".number_format($ganho, 2, ',', '.')."</span>";
+                        ?>       
                     </div>
                     <div class="box box3">
                         <i class="uil uil-share"></i>
                         <span class="text">Saída</span>
-                        <span class="number">30,000</span>
+                        <?php
+                            $gasto = 0;
+                            $sql_gasto = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 2";
+
+                            foreach ($conn->query($sql_gasto) as $row){
+                                $gasto += $row['vl_lancamentos'];
+                            }
+                            echo "<span class='number'>$".number_format($gasto, 2, ',', '.')."</span>";
+                        ?>   
                     </div>
                 </div>
             </div>

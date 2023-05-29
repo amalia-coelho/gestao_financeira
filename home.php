@@ -37,11 +37,12 @@
                 var categoria = $('#categoria').val();
                 var pagamento = $('#pagamento').val();
                 var responsavel = $('#responsavel').val();
+                var tipo_registro = $('#tipo_registro').val();
 
                 $.ajax({
                 url: "php/script_lancamento.php",
                 type: "POST",
-                data: "descricao="+descricao+"&data="+data+"&valor="+valor+"&categoria="+categoria+"&pagamento="+pagamento+"&responsavel="+responsavel,
+                data: "descricao="+descricao+"&data="+data+"&valor="+valor+"&categoria="+categoria+"&pagamento="+pagamento+"&responsavel="+responsavel+"&tipo_registro="+tipo_registro,
                 dataType: "html"
 
                 }).done(function(resposta){
@@ -53,6 +54,9 @@
 
                     // Exibir o lançamento
                     $('.activity-data').load(' .activity-data');
+                    
+                    //Atualizar o dashboard
+                    $('.boxes').load(' .box');
 
                     // Limpar os inputs
                     $('#valor').val(' ');
@@ -151,17 +155,46 @@
                     <div class="box box1">
                         <i class="uil uil-thumbs-up"></i>
                         <span class="text">Total Money</span>
-                        <span class="number">50,000</span>
+                        <?php
+                            require('php/conexao.php');
+                            $total = 0;
+                            $sql_total = "SELECT vl_lancamentos, id_tipo_registro FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd'];
+
+                            foreach ($conn->query($sql_total) as $row){
+                                if ($row['id_tipo_registro'] == 1){
+                                    $total += $row['vl_lancamentos'];
+                                }else{
+                                    $total -= $row['vl_lancamentos'];
+                                }
+                            }
+                            echo "<span class='number'>$".number_format($total, 2, ',', '.')."</span>";
+                            ?>
                     </div>
                     <div class="box box2">
                         <i class="uil uil-comments"></i>
                         <span class="text">Entrada</span>
-                        <span class="number">40,000</span>
+                        <?php
+                            $ganho = 0;
+                            $sql_ganho = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 1";
+
+                            foreach ($conn->query($sql_ganho) as $row){
+                                $ganho += $row['vl_lancamentos'];
+                            }
+                            echo "<span class='number'>$".number_format($ganho, 2, ',', '.')."</span>";
+                        ?>       
                     </div>
                     <div class="box box3">
                         <i class="uil uil-share"></i>
                         <span class="text">Saída</span>
-                        <span class="number">30,000</span>
+                        <?php
+                            $gasto = 0;
+                            $sql_gasto = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 2";
+
+                            foreach ($conn->query($sql_gasto) as $row){
+                                $gasto += $row['vl_lancamentos'];
+                            }
+                            echo "<span class='number'>$".number_format($gasto, 2, ',', '.')."</span>";
+                        ?>   
                     </div>
                 </div>
             </div>
@@ -199,13 +232,25 @@
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control form-control-sm editora" id="valor" name="vl_lancamento">
                                             <label style="color: #000" for="vl_lancamento">Valor</label>
-                                
+                                        </div>
+                                         <div class="mb-3">
+                                            <select class="form-select" id="tipo_registro">
+                                                <option value="" date-default disable selected>Tipo de registro</option>
+                                                <?php 
+                                                    $option = "";
+                                                    $sql = 'SELECT * FROM tb_tipo_registro';
+
+                                                    foreach ($conn->query($sql) as $row){
+                                                        $option .= "<option value='".$row['cd_tipo_registro']."'>".$row['nm_tipo_registro']."</option>";
+                                                    }
+                                                    echo $option;
+                                                ?>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
                                             <select class="form-select" id="categoria">
                                                 <option value="" date-default disable selected>categoria</option>
                                                 <?php 
-                                                    require('php/conexao.php');
                                                     $option = "";
                                                     $sql = 'SELECT * FROM tb_categoria';
 
@@ -220,7 +265,6 @@
                                             <select class="form-select" id="pagamento">
                                                 <option>Pagamento</option>
                                                 <?php 
-                                                    include('php/conexao.php');
                                                     $option = "";
                                                     $sql = "SELECT * FROM tb_forma_pagto";
 
@@ -235,7 +279,6 @@
                                             <select class="form-select" id="responsavel">
                                                 <option>Responsável</option>
                                                 <?php 
-                                                    include('php/conexao.php');
                                                     $option = "";
                                                     $sql = 'SELECT * FROM tb_responsavel';
 
