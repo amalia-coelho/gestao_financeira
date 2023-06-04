@@ -2,8 +2,6 @@
     session_start();
     if (!isset($_SESSION['email'])){
         header('Location: index.php');
-    ;}else if($_SESSION['id_nivel'] != 1){
-        header('Location: home.php');
     }else{
 ?>
 <!DOCTYPE html>
@@ -136,17 +134,46 @@
                     <div class="box box1">
                         <i class="uil uil-thumbs-up"></i>
                         <span class="text">Total Money</span>
-                        <span class="number">50,000</span>
+                        <?php
+                            require('php/conexao.php');
+                            $total = 0;
+                            $sql_total = "SELECT vl_lancamentos, id_tipo_registro FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd'];
+
+                            foreach ($conn->query($sql_total) as $row){
+                                if ($row['id_tipo_registro'] == 1){
+                                    $total += $row['vl_lancamentos'];
+                                }else{
+                                    $total -= $row['vl_lancamentos'];
+                                }
+                            }
+                            echo "<span class='number'>$".number_format($total, 2, ',', '.')."</span>";
+                            ?>
                     </div>
                     <div class="box box2">
                         <i class="uil uil-comments"></i>
                         <span class="text">Entrada</span>
-                        <span class="number">40,000</span>
+                        <?php
+                            $ganho = 0;
+                            $sql_ganho = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 1";
+
+                            foreach ($conn->query($sql_ganho) as $row){
+                                $ganho += $row['vl_lancamentos'];
+                            }
+                            echo "<span class='number'>$".number_format($ganho, 2, ',', '.')."</span>";
+                        ?>       
                     </div>
                     <div class="box box3">
                         <i class="uil uil-share"></i>
                         <span class="text">Saída</span>
-                        <span class="number">30,000</span>
+                        <?php
+                            $gasto = 0;
+                            $sql_gasto = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 2";
+
+                            foreach ($conn->query($sql_gasto) as $row){
+                                $gasto += $row['vl_lancamentos'];
+                            }
+                            echo "<span class='number'>$".number_format($gasto, 2, ',', '.')."</span>";
+                        ?>   
                     </div>
                 </div>
             </div>
@@ -159,7 +186,7 @@
                 </div>
 
             <!-- Botão para acionar modal -->
-            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">Adicionar</button>
+            <button type="button" class="btn btn-success open" data-toggle="modal" data-target="#modalExemplo">Adicionar</button>
 
             <!-- Modal -->
             <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -190,12 +217,12 @@
                 </div>
 
                 <div class="activity-data">
-                    <table class="table" style="">
+                    <table class="table">
                         <thead class="thead-dark bg-dark text-white">
                             <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col" style="width: 10rem; text-align: center;">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -204,7 +231,7 @@
                                 $sql = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
 
                                 foreach ($conn->query($sql) as $row){
-                                    echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td>Futuramente...</td></tr>";
+                                    echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td style='display: flex; align-items: center; justify-content: flex-end;'><button class='btn btn-primary'>Alterar</button><button class='btn btn-danger'>Excluir</button></td></tr>";
                                 }
                             ?>
                         </tbody>

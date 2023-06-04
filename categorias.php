@@ -11,18 +11,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Finanças</title>
+    
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="css/homepag.css">
+    
     <!-- BOOSTRAP -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 
     <!----===== BootStrap 5 CSS ===== -->
-
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!-- Import jquery -->
+    <script src="js/jquery-3.6.1.min.js"></script>
+
+    <!-- jquery -->
+    <script type="text/javascript">
+        $(document).
+    </script>
 </head>
 <body>
     <nav>
@@ -91,7 +100,7 @@
                 <input type="text" placeholder="Buscar Finanças...">
             </div>
             
-            <span class="name-profile">Hi, <!--<< ?php echo $_SESSION['nome'];?> --></span>
+            <span class="name-profile">Hi, <?php echo $_SESSION['nome'];?> </span>
             <i class="uil uil-user-circle"></i>
         </div>
 
@@ -105,17 +114,46 @@
                     <div class="box box1">
                         <i class="uil uil-thumbs-up"></i>
                         <span class="text">Total Money</span>
-                        <span class="number">50,000</span>
+                        <?php
+                            require('php/conexao.php');
+                            $total = 0;
+                            $sql_total = "SELECT vl_lancamentos, id_tipo_registro FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd'];
+
+                            foreach ($conn->query($sql_total) as $row){
+                                if ($row['id_tipo_registro'] == 1){
+                                    $total += $row['vl_lancamentos'];
+                                }else{
+                                    $total -= $row['vl_lancamentos'];
+                                }
+                            }
+                            echo "<span class='number'>$".number_format($total, 2, ',', '.')."</span>";
+                        ?>
                     </div>
                     <div class="box box2">
                         <i class="uil uil-comments"></i>
                         <span class="text">Entrada</span>
-                        <span class="number">40,000</span>
+                        <?php
+                            $ganho = 0;
+                            $sql_ganho = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 1";
+
+                            foreach ($conn->query($sql_ganho) as $row){
+                                $ganho += $row['vl_lancamentos'];
+                            }
+                            echo "<span class='number'>$".number_format($ganho, 2, ',', '.')."</span>";
+                        ?>       
                     </div>
                     <div class="box box3">
                         <i class="uil uil-share"></i>
                         <span class="text">Saída</span>
-                        <span class="number">30,000</span>
+                        <?php
+                            $gasto = 0;
+                            $sql_gasto = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 2";
+
+                            foreach ($conn->query($sql_gasto) as $row){
+                                $gasto += $row['vl_lancamentos'];
+                            }
+                            echo "<span class='number'>$".number_format($gasto, 2, ',', '.')."</span>";
+                        ?>   
                     </div>
                 </div>
             </div>
@@ -124,53 +162,26 @@
                     
                 <div class="title">
                     <i class="uil uil-tachometer-fast-alt"></i>
-                    <span class="text">Gestões recentes</span>
+                    <span class="text">Categorias</span>
                 </div>
 
                                     <!-- Botão para acionar modal -->
-            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">
-              Adicionar nova gestão
-            </button>
+            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">Adicionar categoria</button>
 
             <!-- Modal -->
             <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content ">
                   <div class="modal-header bg-danger text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Gestão Financeira</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de categorias</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
-                
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
+                            <input type="text" class="form-control form-control-sm categoria" id="floatingInput" placeholder="..." name="categoria">
+                            <label style="color: #000" for="categoria">Nome</label>
                 
                         </div>
                   </div>
@@ -186,45 +197,24 @@
                 </div>
 
                 <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">Name</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                    </div>
-                    <div class="data email">
-                        <span class="data-title">Email</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                        <span class="data-list">mayte.bronzatto@gmail.com</span>
-                    </div>
-                    <div class="data joined">
-                        <span class="data-title">Joined</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                        <span class="data-list">2022-11-30</span>
-                    </div>
-                    <div class="data type">
-                        <span class="data-title">Type</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                        <span class="data-list">Maytê Bronzatto</span>
-                    </div>
-                    <div class="data status">
-                        <span class="data-title">Status</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
-                        <span class="data-list">Open</span>
+                    <div class="table dependentes">
+                            <table class="table">
+                                <thead class="thead-dark bg-dark text-white">
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Ações</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                            <?php
+                                $sql_categoria = "SELECT * FROM tb_categoria WHERE id_usuario_busca = NULL OR id_usuario_busca = ".$_SESSION['cd'];
+                                $categorias->
+                                foreach ($conn->query($sql_categoria) as $categorias) {
+                                    echo "<tr><td>" . $categorias['nm_categoria'] . "</td><td>Futuramente...</td>";
+                                }
+                            ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
