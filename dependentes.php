@@ -2,8 +2,6 @@
     session_start();
     if (!isset($_SESSION['email'])){
         header('Location: index.php');
-    ;}else if($_SESSION['id_nivel'] != 1){
-        header('Location: home.php');
     }else{
 ?>
 <!DOCTYPE html>
@@ -188,7 +186,7 @@
                 </div>
 
             <!-- Botão para acionar modal -->
-            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">Adicionar</button>
+            <button type="button" class="btn btn-success open" data-toggle="modal" data-target="#modalExemplo">Adicionar</button>
 
             <!-- Modal -->
             <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -219,12 +217,12 @@
                 </div>
 
                 <div class="activity-data">
-                    <table class="table" style="">
+                    <table class="table">
                         <thead class="thead-dark bg-dark text-white">
                             <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col" style="width: 10rem; text-align: center;">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -233,7 +231,7 @@
                                 $sql = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
 
                                 foreach ($conn->query($sql) as $row){
-                                    echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td>Futuramente...</td></tr>";
+                                    echo "<tr><td>".$row['nm_usuario']."</td><td>".$row['ds_login']."</td><td style='display: flex; align-items: center; justify-content: flex-end;'><button class='btn btn-primary'>Alterar</button><button class='btn btn-danger'>Excluir</button></td></tr>";
                                 }
                             ?>
                         </tbody>

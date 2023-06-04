@@ -343,14 +343,19 @@ nav.close~.dashboard .top {
 
 .add {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 
+}
+
+.add .btn-success {
+    margin-right: 5rem;
 }
 
 .add .open {
     width: 15rem;
 }
+
 
 .modal-content .close {
     color: #FFF;

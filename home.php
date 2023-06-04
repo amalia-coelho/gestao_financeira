@@ -67,9 +67,23 @@
                     $('#pagamento option:first').prop('selected',true);
                     $('#categoria option:first').prop('selected',true);
                     $('#responsavel option:first').prop('selected',true);
+                    $('#tipo_registro option:first').prop('selected',true);
                 }).fail(function(jqXHR, textStatus ) {
                     console.log("Request failed: " + textStatus);
                 });
+            });
+
+            $('#fechar').click(function(){
+                // Limpar os inputs
+                $('#valor').val(' ');
+                $('#data').val(' ');
+                $('#descricao').val(' ');
+
+                //resetar os select
+                $('#pagamento option:first').prop('selected',true);
+                $('#categoria option:first').prop('selected',true);
+                $('#responsavel option:first').prop('selected',true);
+                $('#tipo_registro option:first').prop('selected',true);
             });
 		});
 	</script>
@@ -103,16 +117,10 @@
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Responsável</span>
                 </a></li>
-                <?php 
-                    if($_SESSION['id_nivel'] == 1){
-                    ?>  
                     <li><a href="dependentes.php">
                         <i class="uil uil-comments"></i>
                         <span class="link-name">Dependente</span>
                     </a></li>
-                    <?php
-                    }
-                ?>
             </ul>
         <ul class="logout-mode"><li><a href="logout.php">
                 <i class="uil uil-signout"></i>
@@ -337,67 +345,37 @@
                                     $stmt_responsavel->bindValue(':responsavel', $row['id_responsavel']);
                                     $stmt_responsavel->execute();
                                     $responsavel = $stmt_responsavel->fetchColumn();
-
-                                    echo "<tr><td>".$row['ds_lancamento']."</td><td>".$row['vl_lancamentos']."</td><td>".$row['dt_lancamento']."</td><td>".$categoria."</td><td>".$pagamento."</td><td>".$responsavel."</td><td>Futuramente...</td></tr>";
-                            }
+                                    
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row['ds_lancamento'];?></td>
+                                        <td><?php echo $row['vl_lancamentos'];?></td>
+                                        <td><?php echo $row['dt_lancamento'];?></td>
+                                        <td><?php echo $categoria;?></td>
+                                        <td><?php echo $pagamento;?></td>
+                                        <td><?php echo $responsavel;?></td>
+                                        <td><a href='php/deletar_registro.php?cod=<?php echo $row['cd_lancamento'];?>' class="btn btn-outline-danger btn-sm">Excluir</a></td>
+                                    </tr>
+                                <?php
+                                }
                             ?>   
                         </tbody>
                     </table>
                     <?php
-                        if ($_SESSION['id_nivel'] == 1) {
-                            $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE id_responsavel = :id");
-                            $stmt->bindValue(':id', $_SESSION['cd']);
-                            $stmt->execute();
+                        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE id_responsavel = :id");
+                        $stmt->bindValue(':id', $_SESSION['cd']);
+                        $stmt->execute();
 
-                            $dependentes = $stmt->fetch(PDO::FETCH_ASSOC);
-                            if ($dependentes) {
-                                $sql_dependente = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
+                        $dependentes = $stmt->fetch(PDO::FETCH_ASSOC);
+                        if ($dependentes) {
+                            $sql_dependente = "SELECT * FROM tb_usuario WHERE id_responsavel = ".$_SESSION['cd'];
 
-                                foreach ($conn->query($sql_dependente) as $info_dependente) {?>
-                                <div class="table dependentes">
-                                    <h3><?php echo $info_dependente['nm_usuario'] . " " . $info_dependente['sn_usuario']; ?></h3>
-                                        <table class="table">
-                                            <thead class="thead-dark bg-dark text-white">
-                                                <tr>
-                                                    <th scope="col">Descrição</th>
-                                                    <th scope="col">Valor</th>
-                                                    <th scope="col">Data</th>
-                                                    <th scope="col">Categoria</th>
-                                                    <th scope="col">Pagamento</th>
-                                                    <th scope="col">Responsavel</th>
-                                                </tr>
-                                            </thead>
-                                        <tbody>
-                                        <?php
-                                            $sql_lancamento = "SELECT * FROM tb_lancamento WHERE id_usuario = ".$info_dependente['cd_usuario'];
-                                            
-                                            foreach ($conn->query($sql_lancamento) as $info_lancamento) {
-                                                // ID_CATEGORIA
-                                                $stmt_categoria = $conn->prepare("SELECT nm_categoria FROM tb_categoria WHERE cd_categoria = :categoria");
-                                                $stmt_categoria->bindValue(':categoria', $info_lancamento['id_categoria']);
-                                                $stmt_categoria->execute();
-                                                $categoria = $stmt_categoria->fetchColumn();
-
-                                                // ID_FORMA_PAGTO
-                                                $stmt_pagamento = $conn->prepare("SELECT nm_forma_pagto FROM tb_forma_pagto WHERE cd_forma_pagto = :pagamento");
-                                                $stmt_pagamento->bindValue(':pagamento', $info_lancamento['id_forma_pagto']);
-                                                $stmt_pagamento->execute();
-                                                $pagamento = $stmt_pagamento->fetchColumn();
-
-                                                // ID__RESPONSAVEL
-                                                $stmt_responsavel = $conn->prepare("SELECT nm_responsavel FROM tb_responsavel WHERE cd_responsavel = :responsavel");
-                                                $stmt_responsavel->bindValue(':responsavel', $info_lancamento['id_responsavel']);
-                                                $stmt_responsavel->execute();
-                                                $responsavel = $stmt_responsavel->fetchColumn();
-
-                                                echo "<tr><td>" . $info_lancamento['ds_lancamento'] . "</td><td>" . $info_lancamento['vl_lancamentos'] . "</td><td>" . $info_lancamento['dt_lancamento'] . "</td><td>" . $categoria . "</td><td>" . $pagamento . "</td><td>" . $responsavel . "</td></tr>";
-                                            }
-                                        ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <?php
-                                }
+                            foreach ($conn->query($sql_dependente) as $info_dependente) {?>
+                            <div class="dashboard-dependentes">
+                                <h3><?php echo $info_dependente['nm_usuario'] . " " . $info_dependente['sn_usuario']; ?></h3>
+                                <!-- Local para o dashboard geral/balanço total -->
+                            </div>
+                            <?php
                             }
                         }
                     ?>

@@ -162,28 +162,26 @@
                     
                 <div class="title">
                     <i class="uil uil-tachometer-fast-alt"></i>
-                    <span class="text">Gestões recentes</span>
+                    <span class="text">Categorias</span>
                 </div>
 
                                     <!-- Botão para acionar modal -->
-            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">
-              Adicionar nova gestão
-            </button>
+            <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">Adicionar categoria</button>
 
             <!-- Modal -->
             <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content ">
                   <div class="modal-header bg-danger text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Gestão Financeira</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de categorias</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm editora" id="floatingInput" placeholder="name@example.com" name="editora">
-                            <label style="color: #000" for="editora">Editora</label>
+                            <input type="text" class="form-control form-control-sm categoria" id="floatingInput" placeholder="..." name="categoria">
+                            <label style="color: #000" for="categoria">Nome</label>
                 
                         </div>
                   </div>
@@ -200,7 +198,6 @@
 
                 <div class="activity-data">
                     <div class="table dependentes">
-                        <h3>Categorias</h3>
                             <table class="table">
                                 <thead class="thead-dark bg-dark text-white">
                                     <tr>
@@ -211,7 +208,7 @@
                             <tbody>
                             <?php
                                 $sql_categoria = "SELECT * FROM tb_categoria WHERE id_usuario_busca = NULL OR id_usuario_busca = ".$_SESSION['cd'];
-                                
+                                $categorias->
                                 foreach ($conn->query($sql_categoria) as $categorias) {
                                     echo "<tr><td>" . $categorias['nm_categoria'] . "</td><td>Futuramente...</td>";
                                 }
