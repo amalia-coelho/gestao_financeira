@@ -30,7 +30,7 @@
 
     <!-- jquery -->
     <script type="text/javascript">
-        $(document).
+        
     </script>
 </head>
 <body>
@@ -105,58 +105,6 @@
         </div>
 
         <div class="dash-content">
-            <div class="overview">
-                <div class="title">
-                    <i class="uil uil-tachometer-fast-alt"></i>
-                    <span class="text">Dashboard</span>
-                </div>
-                <div class="boxes">
-                    <div class="box box1">
-                        <i class="uil uil-thumbs-up"></i>
-                        <span class="text">Total Money</span>
-                        <?php
-                            require('php/conexao.php');
-                            $total = 0;
-                            $sql_total = "SELECT vl_lancamentos, id_tipo_registro FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd'];
-
-                            foreach ($conn->query($sql_total) as $row){
-                                if ($row['id_tipo_registro'] == 1){
-                                    $total += $row['vl_lancamentos'];
-                                }else{
-                                    $total -= $row['vl_lancamentos'];
-                                }
-                            }
-                            echo "<span class='number'>$".number_format($total, 2, ',', '.')."</span>";
-                        ?>
-                    </div>
-                    <div class="box box2">
-                        <i class="uil uil-comments"></i>
-                        <span class="text">Entrada</span>
-                        <?php
-                            $ganho = 0;
-                            $sql_ganho = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 1";
-
-                            foreach ($conn->query($sql_ganho) as $row){
-                                $ganho += $row['vl_lancamentos'];
-                            }
-                            echo "<span class='number'>$".number_format($ganho, 2, ',', '.')."</span>";
-                        ?>       
-                    </div>
-                    <div class="box box3">
-                        <i class="uil uil-share"></i>
-                        <span class="text">Saída</span>
-                        <?php
-                            $gasto = 0;
-                            $sql_gasto = "SELECT vl_lancamentos FROM tb_lancamento WHERE id_usuario =".$_SESSION['cd']." AND id_tipo_registro = 2";
-
-                            foreach ($conn->query($sql_gasto) as $row){
-                                $gasto += $row['vl_lancamentos'];
-                            }
-                            echo "<span class='number'>$".number_format($gasto, 2, ',', '.')."</span>";
-                        ?>   
-                    </div>
-                </div>
-            </div>
             <div class="overview activity">
                 <div class="add">
                     
@@ -164,8 +112,8 @@
                     <i class="uil uil-tachometer-fast-alt"></i>
                     <span class="text">Categorias</span>
                 </div>
-
-                                    <!-- Botão para acionar modal -->
+                
+            <!-- Botão para acionar modal -->
             <button type="button" class="btn btn-primary open" data-toggle="modal" data-target="#modalExemplo">Adicionar categoria</button>
 
             <!-- Modal -->
@@ -207,10 +155,20 @@
                                 </thead>
                             <tbody>
                             <?php
-                                $sql_categoria = "SELECT * FROM tb_categoria WHERE id_usuario_busca = NULL OR id_usuario_busca = ".$_SESSION['cd'];
-                                $categorias->
-                                foreach ($conn->query($sql_categoria) as $categorias) {
-                                    echo "<tr><td>" . $categorias['nm_categoria'] . "</td><td>Futuramente...</td>";
+                                include("php/conexao.php");
+                                $sql_categoria = "SELECT * FROM tb_categoria WHERE id_usuario_busca is null OR id_usuario_busca = ".$_SESSION['cd'];
+
+                                foreach ($conn->query($sql_categoria) as $categoria) {?>
+                                    <tr>
+                                        <td><?php echo $categoria['nm_categoria'];?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-outline-primary open alterar" data-toggle="modal" data-target="#exampleModal" 
+                                            cod="<?php echo $categoria['cd_categoria'];?>" 
+                                            nome="<?php echo $categoria['nm_categoria']?>">Alterar</button>
+                                            <a href='php/deletar_categoria.php?cod=<?php echo $categoria['cd_categoria'];?>' class="btn btn-outline-danger btn-sm">Excluir</a>
+                                        </td>
+                                    </tr>
+                                <?php
                                 }
                             ?>
                             </tbody>
@@ -222,11 +180,6 @@
     </section>
     
     <script src="js/toggle.js"></script>
-    <!-- BootStrap SRC -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.6.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>>
 </body>
 </html>
 <?php

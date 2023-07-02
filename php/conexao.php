@@ -6,4 +6,6 @@
         echo 'ERROR: ' . $e->getMessage();
         echo "<br>".$stmt->rowCount();
     }
+    $conn->exec("SET NAMES utf8");
+    $conn->exec("SET CHARACTER SET utf8");
 ?>
